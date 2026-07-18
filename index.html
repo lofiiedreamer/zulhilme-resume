@@ -2,412 +2,482 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Mohamad Zulhilme — Electrical &amp; Electronics</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamad Zulhilme — Electrical & Electronics Educator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/128/three.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <style>
-:root{
-  --bg:#070A12;
-  --bg-alt:#0D111C;
-  --panel:#121826;
-  --steel:#1D2536;
-  --steel-light:#2A3348;
-  --line:rgba(255,255,255,0.09);
-  --line-strong:rgba(255,255,255,0.16);
-  --blue:#3B7BFF;
-  --blue-bright:#6C9CFF;
-  --violet:#8B5CF6;
-  --sky:#63C9FF;
-  --white:#F3F5FA;
-  --muted:#8891AC;
-  --muted-dim:#5B6480;
-}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth; background:var(--bg);}
-body{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--white);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  cursor:default;
-}
-h1,h2,h3,.display{font-family:'Oswald',sans-serif; text-transform:uppercase;}
-.mono{font-family:'JetBrains Mono',monospace;}
-a{color:inherit; text-decoration:none;}
-img{max-width:100%; display:block;}
-::selection{background:var(--violet); color:var(--white);}
-.wrap{max-width:1120px; margin:0 auto; padding:0 24px;}
-@media(min-width:768px){ .wrap{padding:0 40px;} }
+  :root{
+    --navy:#0E1A3C;
+    --navy-deep:#081029;
+    --blue:#2E5BFF;
+    --blue-soft:#5B7FFF;
+    --purple:#8B5CF6;
+    --sky:#EEF4FF;
+    --sky-deep:#DCE9FF;
+    --white:#FFFFFF;
+    --ink:#101833;
+    --muted:#5A6485;
+    --line:#D6E1FA;
+    --glow: 0 0 24px rgba(139,92,246,0.45);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk', sans-serif;}
+  .mono{font-family:'JetBrains Mono', monospace;}
+  a{color:inherit;}
+  ::selection{background:var(--purple); color:var(--white);}
 
-/* ---------------- custom cursor (desktop only) ---------------- */
-#cursorDot{
-  position:fixed; top:0; left:0; width:10px; height:10px; border-radius:50%;
-  background:var(--sky); pointer-events:none; z-index:9999; mix-blend-mode:difference;
-  transform:translate(-50%,-50%);
-}
-#cursorRing{
-  position:fixed; top:0; left:0; width:34px; height:34px; border-radius:50%;
-  border:1px solid rgba(139,92,246,0.6); pointer-events:none; z-index:9998;
-  transform:translate(-50%,-50%);
-}
-@media(hover:none), (pointer:coarse){ #cursorDot, #cursorRing{display:none;} }
+  /* ---------- utility ---------- */
+  .wrap{max-width:1080px; margin:0 auto; padding:0 32px;}
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--blue);
+    font-weight:600;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    display:inline-block;
+  }
+  .section-title{
+    font-size:clamp(1.7rem, 3.2vw, 2.4rem);
+    font-weight:700;
+    color:var(--navy);
+    margin-bottom:40px;
+    letter-spacing:-0.01em;
+  }
+  section{position:relative; padding:100px 0;}
 
-/* ---------------- layout helpers ---------------- */
-section{position:relative; padding:80px 0;}
-@media(min-width:768px){ section{padding:120px 0;} }
-.edge-top{
-  position:absolute; top:0; left:0; right:0; height:46px;
-  clip-path:polygon(0 100%, 100% 0, 100% 100%);
-  z-index:1;
-}
-.eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:0.68rem;
-  letter-spacing:0.22em;
-  text-transform:uppercase;
-  color:var(--blue-bright);
-  font-weight:600;
-  display:flex; align-items:center; gap:10px;
-  margin-bottom:16px;
-}
-.eyebrow::before{
-  content:""; width:26px; height:2px;
-  background:linear-gradient(90deg,var(--blue),var(--violet));
-}
-.section-title{
-  font-size:clamp(1.5rem,5vw,2.6rem);
-  font-weight:700;
-  color:var(--white);
-  margin-bottom:44px;
-  letter-spacing:0.01em;
-  line-height:1.15;
-}
-.reveal{opacity:0; transform:translateY(50px);}
-.split-word{display:inline-block; overflow:hidden;}
-.split-inner{display:inline-block; transform:translateY(110%);}
+  /* ---------- circuit trace (desktop signature element) ---------- */
+  .trace-rail{
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:2px;
+    transform:translateX(-50%);
+    z-index:0;
+    pointer-events:none;
+  }
+  .trace-track{
+    position:absolute; inset:0;
+    background:var(--line);
+  }
+  .trace-fill{
+    position:absolute; top:0; left:0; right:0;
+    height:0%;
+    background:linear-gradient(180deg, var(--blue), var(--purple));
+    box-shadow:0 0 14px rgba(91,127,255,0.6);
+  }
+  .trace-node{
+    position:absolute;
+    left:50%;
+    width:14px; height:14px;
+    background:var(--white);
+    border:2px solid var(--line);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    transition:border-color .4s ease, box-shadow .4s ease, background .4s ease;
+    z-index:1;
+  }
+  .trace-node.lit{
+    border-color:var(--purple);
+    background:var(--purple);
+    box-shadow:var(--glow);
+  }
 
-/* ---------------- NAV ---------------- */
-nav{
-  position:fixed; top:0; left:0; right:0; z-index:200;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:16px 24px;
-  background:rgba(7,10,18,0.7);
-  backdrop-filter:blur(16px);
-  border-bottom:1px solid var(--line);
-}
-@media(min-width:768px){ nav{padding:18px 40px;} }
-.nav-logo{
-  font-family:'JetBrains Mono',monospace;
-  font-weight:700; font-size:0.85rem;
-  letter-spacing:0.05em;
-  display:flex; align-items:center; gap:8px;
-  z-index:2;
-}
-.nav-logo .dot{width:7px; height:7px; background:var(--violet); border-radius:50%; box-shadow:0 0 10px var(--violet);}
-.nav-links{display:none; gap:32px; font-size:0.8rem; font-weight:600; letter-spacing:0.03em;}
-.nav-links a{color:var(--muted); position:relative; padding:6px 0; text-transform:uppercase;}
-.nav-links a::after{
-  content:""; position:absolute; left:0; bottom:0; width:0%; height:2px;
-  background:linear-gradient(90deg,var(--blue),var(--violet)); transition:width .3s ease;
-}
-.nav-links a:hover{color:var(--white);}
-.nav-links a:hover::after, .nav-links a.active::after{width:100%;}
-.nav-links a.active{color:var(--white);}
-@media(min-width:900px){ .nav-links{display:flex;} }
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed; top:0; left:0; right:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 32px;
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+    transform:translateY(-100%);
+  }
+  nav .logo{
+    font-family:'JetBrains Mono', monospace;
+    font-weight:600; font-size:0.85rem;
+    color:var(--navy);
+    letter-spacing:0.02em;
+  }
+  nav .logo span{color:var(--purple);}
+  nav .navlinks{display:flex; gap:28px; font-size:0.82rem; font-weight:500;}
+  nav .navlinks a{
+    color:var(--muted); text-decoration:none;
+    position:relative; padding-bottom:4px;
+  }
+  nav .navlinks a::after{
+    content:""; position:absolute; left:0; bottom:0;
+    width:0%; height:2px;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    transition:width .3s ease;
+  }
+  nav .navlinks a:hover{color:var(--navy);}
+  nav .navlinks a:hover::after{width:100%;}
+  @media (max-width:720px){ nav .navlinks{display:none;} }
 
-.burger{
-  width:38px; height:38px; display:flex; align-items:center; justify-content:center;
-  flex-direction:column; gap:6px; cursor:pointer; z-index:2; background:none; border:none;
-}
-@media(min-width:900px){ .burger{display:none;} }
-.burger span{width:22px; height:2px; background:var(--white); display:block; transition:transform .3s ease, opacity .3s ease;}
-.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg);}
-.burger.open span:nth-child(2){opacity:0;}
-.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:radial-gradient(ellipse at 20% 20%, #16225a 0%, var(--navy-deep) 60%);
+    position:relative;
+    overflow:hidden;
+    padding:140px 0 100px;
+  }
+  #circuitCanvas{
+    position:absolute; inset:0; width:100%; height:100%;
+    opacity:0.55;
+  }
+  .hero-inner{
+    position:relative; z-index:2;
+    display:grid;
+    grid-template-columns:1fr auto;
+    gap:60px;
+    align-items:center;
+    width:100%;
+  }
+  .hero-photo-wrap{
+    display:flex; justify-content:center;
+  }
+  .hero-photo{
+    width:190px; height:190px;
+    border-radius:28px;
+    object-fit:cover;
+    border:2px solid rgba(139,92,246,0.5);
+    box-shadow:0 0 0 8px rgba(46,91,255,0.08), 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .hero-eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    color:#9CB2FF;
+    font-size:0.78rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .pulse-dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--purple);
+    box-shadow:0 0 12px var(--purple);
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 6vw, 4.2rem);
+    color:var(--white);
+    line-height:1.05;
+    font-weight:700;
+    letter-spacing:-0.02em;
+    margin-bottom:18px;
+  }
+  .hero h1 .accent{
+    background:linear-gradient(90deg, #6FA0FF, #C79BFF);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.tagline{
+    font-size:1.05rem;
+    color:#B9C4EA;
+    max-width:520px;
+    margin-bottom:32px;
+    line-height:1.65;
+  }
+  .hero-stats{
+    display:flex; gap:14px; flex-wrap:wrap;
+    margin-bottom:36px;
+  }
+  .stat-chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:#DCE5FF;
+    background:rgba(255,255,255,0.06);
+    border:1px solid rgba(139,92,246,0.35);
+    padding:9px 16px;
+    border-radius:100px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .stat-chip b{color:var(--white); font-weight:700;}
+  .hero-contact{
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .contact-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:12px 22px;
+    border-radius:10px;
+    font-size:0.88rem; font-weight:600;
+    text-decoration:none;
+    transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .contact-btn.primary{
+    background:linear-gradient(90deg, var(--blue), var(--purple));
+    color:var(--white);
+  }
+  .contact-btn.ghost{
+    color:var(--white);
+    border:1px solid rgba(255,255,255,0.25);
+  }
+  .contact-btn:hover{transform:translateY(-3px); box-shadow:0 10px 24px rgba(91,90,255,0.35);}
 
-#mobileMenu{
-  position:fixed; inset:0; background:var(--bg); z-index:150;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:26px;
-  opacity:0; pointer-events:none;
-}
-#mobileMenu.open{pointer-events:auto;}
-#mobileMenu a{
-  font-family:'Oswald',sans-serif; font-size:1.9rem; font-weight:600;
-  text-transform:uppercase; letter-spacing:0.03em; color:var(--white);
-  opacity:0; transform:translateY(24px);
-}
+  .scroll-cue{
+    position:absolute; bottom:34px; left:50%; transform:translateX(-50%);
+    color:#8FA0E0; font-family:'JetBrains Mono',monospace; font-size:0.68rem;
+    letter-spacing:0.15em; text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+    z-index:2;
+  }
+  .scroll-cue .line{width:1px; height:36px; background:linear-gradient(180deg, #8FA0E0, transparent); animation:scrollline 1.8s ease-in-out infinite;}
+  @keyframes scrollline{0%{opacity:0; transform:scaleY(0.3); transform-origin:top;} 50%{opacity:1; transform:scaleY(1);} 100%{opacity:0; transform:scaleY(0.3); transform-origin:bottom;}}
 
-/* ---------------- HERO ---------------- */
-.hero{
-  min-height:100svh;
-  display:flex; align-items:center;
-  position:relative; overflow:hidden;
-  padding:120px 0 80px;
-  background:radial-gradient(ellipse 80% 60% at 30% 0%, #131b34 0%, var(--bg) 65%);
-}
-#heroCanvas{position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:0.9;}
-.hero-inner{position:relative; z-index:2; display:grid; grid-template-columns:1fr; gap:40px; align-items:center;}
-@media(min-width:860px){ .hero-inner{grid-template-columns:1.1fr 0.9fr; gap:50px;} }
+  @media (max-width:820px){
+    .hero-inner{grid-template-columns:1fr; text-align:center;}
+    .hero-photo-wrap{order:-1;}
+    .hero p.tagline{margin-left:auto; margin-right:auto;}
+    .hero-stats, .hero-contact{justify-content:center;}
+  }
 
-.hero-photo-wrap{display:flex; justify-content:center; order:-1;}
-@media(min-width:860px){ .hero-photo-wrap{order:2;} }
-.hero-photo-frame{
-  position:relative; width:180px; height:180px;
-}
-@media(min-width:480px){ .hero-photo-frame{width:210px; height:210px;} }
-@media(min-width:860px){ .hero-photo-frame{width:260px; height:260px;} }
-.hero-photo-frame::before{
-  content:""; position:absolute; inset:-8px;
-  border:1px solid var(--line-strong);
-  clip-path:polygon(0 14%, 14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%);
-}
-.hero-photo{
-  width:100%; height:100%; object-fit:cover;
-  clip-path:polygon(0 14%, 14% 0, 100% 0, 100% 86%, 86% 100%, 0 100%);
-  filter:grayscale(0.15) contrast(1.08);
-  border:2px solid rgba(139,92,246,0.4);
-}
+  /* ---------- OBJECTIVE ---------- */
+  .objective{background:var(--sky);}
+  .objective-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:20px;
+    padding:44px;
+    box-shadow:0 20px 50px -30px rgba(46,91,255,0.25);
+    max-width:760px; margin:0 auto;
+    position:relative;
+  }
+  .objective-card::before{
+    content:"";
+    position:absolute; top:0; left:0; right:0; height:4px;
+    border-radius:20px 20px 0 0;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+  }
+  .objective-card p{
+    font-size:1.08rem; line-height:1.85; color:var(--ink);
+  }
+  .objective-card p b{color:var(--blue);}
 
-.hero-eyebrow{
-  font-family:'JetBrains Mono',monospace; color:var(--sky); font-size:0.72rem;
-  letter-spacing:0.2em; text-transform:uppercase; margin-bottom:18px;
-  display:flex; align-items:center; gap:10px;
-}
-.pulse-dot{width:7px; height:7px; border-radius:50%; background:var(--violet); box-shadow:0 0 12px var(--violet); animation:pulse 1.8s ease-in-out infinite;}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.4;transform:scale(1.4);}}
+  /* ---------- EXPERIENCE ---------- */
+  .exp-list{display:flex; flex-direction:column; gap:28px; max-width:820px; margin:0 auto;}
+  .exp-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:18px;
+    padding:32px 36px;
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:24px;
+    transition:transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+  }
+  .exp-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 24px 50px -25px rgba(139,92,246,0.35);
+    border-color:var(--purple);
+  }
+  .exp-date{
+    font-family:'JetBrains Mono', monospace;
+    font-size:0.78rem;
+    color:var(--purple);
+    font-weight:600;
+  }
+  .exp-role{font-size:1.15rem; font-weight:700; color:var(--navy); margin-bottom:4px;}
+  .exp-company{
+    font-size:0.85rem; color:var(--blue); font-weight:600; margin-bottom:12px;
+    font-family:'JetBrains Mono', monospace;
+  }
+  .exp-desc{color:var(--muted); line-height:1.65; font-size:0.95rem;}
+  @media (max-width:640px){
+    .exp-card{grid-template-columns:1fr; gap:10px;}
+  }
 
-.hero h1{
-  font-size:clamp(2rem,9vw,4.4rem);
-  line-height:1.02; font-weight:700; letter-spacing:-0.01em;
-  margin-bottom:20px;
-}
-.hero h1 .accent{
-  background:linear-gradient(90deg,#6C9CFF,#B79BFF);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-}
-.hero p.tagline{
-  font-family:'Inter',sans-serif;
-  font-size:clamp(0.88rem,2vw,1.05rem);
-  color:var(--muted); max-width:480px; line-height:1.7; margin-bottom:30px;
-}
-.hero-stats{display:flex; gap:10px; flex-wrap:wrap; margin-bottom:32px;}
-.stat-chip{
-  font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--white);
-  background:rgba(255,255,255,0.04); border:1px solid var(--line-strong);
-  padding:9px 14px; display:flex; align-items:center; gap:7px;
-  clip-path:polygon(8px 0,100% 0,100% 100%,0 100%,0 8px);
-}
-.stat-chip b{color:var(--sky); font-weight:700;}
-.hero-contact{display:flex; gap:14px; flex-wrap:wrap;}
-.btn{
-  position:relative; display:inline-flex; align-items:center; gap:8px;
-  padding:13px 26px; font-family:'JetBrains Mono',monospace; font-size:0.78rem;
-  font-weight:600; letter-spacing:0.05em; text-transform:uppercase;
-  clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
-  overflow:hidden;
-}
-.btn.primary{background:linear-gradient(120deg,var(--blue),var(--violet)); color:var(--white);}
-.btn.ghost{border:1px solid var(--line-strong); color:var(--white);}
-.btn span.magnetic-inner{position:relative; z-index:2;}
+  /* ---------- EDUCATION ---------- */
+  .education{background:var(--sky);}
+  .edu-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .edu-card{
+    background:var(--white);
+    border-radius:18px;
+    padding:30px 26px;
+    border:1px solid var(--line);
+    text-align:center;
+    transition:transform .3s ease;
+  }
+  .edu-card:hover{transform:translateY(-8px);}
+  .edu-years{font-family:'JetBrains Mono', monospace; color:var(--blue); font-size:0.8rem; font-weight:600; margin-bottom:14px;}
+  .edu-cgpa{
+    display:inline-block;
+    margin-top:16px;
+    font-family:'JetBrains Mono', monospace;
+    font-weight:700; font-size:1.4rem;
+    background:linear-gradient(90deg,var(--blue),var(--purple));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .edu-title{font-weight:700; color:var(--navy); font-size:1.02rem; margin-bottom:6px;}
+  .edu-school{color:var(--muted); font-size:0.88rem;}
+  .edu-tag{font-size:0.68rem; letter-spacing:0.08em; color:var(--purple); font-weight:600; text-transform:uppercase; margin-top:10px;}
+  @media (max-width:820px){ .edu-grid{grid-template-columns:1fr;} }
 
-.scroll-cue{
-  position:absolute; bottom:26px; left:50%; transform:translateX(-50%);
-  color:var(--muted-dim); font-family:'JetBrains Mono',monospace; font-size:0.62rem;
-  letter-spacing:0.2em; text-transform:uppercase;
-  display:flex; flex-direction:column; align-items:center; gap:8px; z-index:2;
-}
-.scroll-cue .line{width:1px; height:32px; background:linear-gradient(180deg,var(--muted-dim),transparent); animation:scrollline 1.8s ease-in-out infinite;}
-@keyframes scrollline{0%{opacity:0;transform:scaleY(.3);transform-origin:top;}50%{opacity:1;transform:scaleY(1);}100%{opacity:0;transform:scaleY(.3);transform-origin:bottom;}}
+  /* ---------- ACHIEVEMENTS ---------- */
+  .ach-list{max-width:760px; margin:0 auto; display:flex; flex-direction:column;}
+  .ach-item{
+    display:grid; grid-template-columns:auto 1fr;
+    gap:20px; align-items:flex-start;
+    padding:20px 0;
+    border-bottom:1px solid var(--line);
+  }
+  .ach-item:last-child{border-bottom:none;}
+  .ach-icon{
+    width:38px; height:38px; border-radius:10px;
+    background:linear-gradient(135deg,var(--blue),var(--purple));
+    display:flex; align-items:center; justify-content:center;
+    color:white; font-family:'JetBrains Mono',monospace; font-size:0.75rem; font-weight:700;
+    flex-shrink:0;
+  }
+  .ach-text{font-size:0.98rem; color:var(--ink); line-height:1.6; padding-top:6px;}
+  .ach-year{color:var(--purple); font-family:'JetBrains Mono',monospace; font-size:0.78rem; font-weight:600; padding-top:8px;}
 
-/* ---------------- OBJECTIVE ---------------- */
-.objective{background:var(--bg-alt);}
-.objective-card{
-  background:var(--panel); border:1px solid var(--line);
-  padding:32px 26px; max-width:760px; margin:0 auto; position:relative;
-  clip-path:polygon(0 0,100% 0,100% 100%,20px 100%,0 calc(100% - 20px));
-}
-@media(min-width:768px){ .objective-card{padding:44px;} }
-.objective-card::before{
-  content:""; position:absolute; top:0; left:0; bottom:0; width:3px;
-  background:linear-gradient(180deg,var(--blue),var(--violet));
-}
-.objective-card p{font-size:clamp(0.95rem,2vw,1.08rem); line-height:1.85; color:#D3D8E8;}
-.objective-card p b{color:var(--sky);}
+  /* ---------- SKILLS ---------- */
+  .skills{background:var(--sky);}
+  .skills-grid{display:grid; grid-template-columns:1fr 1fr; gap:50px;}
+  .lang-row{margin-bottom:22px;}
+  .lang-row .lang-top{display:flex; justify-content:space-between; font-size:0.9rem; margin-bottom:8px;}
+  .lang-row .lang-top span:first-child{font-weight:600; color:var(--navy);}
+  .lang-row .lang-top span:last-child{font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--purple);}
+  .bar-track{height:8px; border-radius:100px; background:var(--sky-deep); overflow:hidden;}
+  .bar-fill{height:100%; border-radius:100px; width:0%; background:linear-gradient(90deg,var(--blue),var(--purple));}
+  .chip-cloud{display:flex; flex-wrap:wrap; gap:10px;}
+  .chip{
+    padding:9px 16px; border-radius:100px;
+    background:var(--white); border:1px solid var(--line);
+    font-size:0.85rem; font-weight:600; color:var(--navy);
+    font-family:'JetBrains Mono', monospace;
+  }
+  @media (max-width:760px){ .skills-grid{grid-template-columns:1fr; gap:36px;} }
 
-/* ---------------- EXPERIENCE (horizontal scroll on desktop) ---------------- */
-.exp-pin{position:relative;}
-.exp-track{
-  display:flex; flex-direction:column; gap:20px;
-}
-@media(min-width:960px){
-  .exp-track{display:flex; flex-direction:row; gap:32px; width:max-content; will-change:transform;}
-}
-.exp-card{
-  background:var(--panel); border:1px solid var(--line);
-  padding:28px 26px; position:relative;
-  clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);
-}
-@media(min-width:960px){ .exp-card{width:400px; flex-shrink:0; padding:38px 34px;} }
-.exp-card:hover{border-color:var(--violet);}
-.exp-index{font-family:'JetBrains Mono',monospace; color:var(--muted-dim); font-size:0.7rem; margin-bottom:14px;}
-.exp-date{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--sky); font-weight:600; margin-bottom:10px;}
-.exp-role{font-family:'Oswald',sans-serif; font-size:1.2rem; font-weight:600; color:var(--white); margin-bottom:4px; text-transform:uppercase;}
-.exp-company{font-size:0.78rem; color:var(--blue-bright); font-weight:600; margin-bottom:14px; font-family:'JetBrains Mono',monospace;}
-.exp-desc{color:var(--muted); line-height:1.65; font-size:0.9rem;}
+  /* ---------- TEACHING STRENGTHS ---------- */
+  .strength-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .strength-card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:26px;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .strength-card:hover{transform:translateY(-6px); border-color:var(--blue);}
+  .strength-num{font-family:'JetBrains Mono',monospace; color:var(--blue); font-size:0.75rem; font-weight:700; margin-bottom:12px;}
+  .strength-card p{font-size:0.92rem; color:var(--ink); line-height:1.55;}
+  @media (max-width:820px){ .strength-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .strength-grid{grid-template-columns:1fr;} }
 
-/* ---------------- EDUCATION ---------------- */
-.education{background:var(--bg-alt);}
-.edu-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-@media(min-width:700px){ .edu-grid{grid-template-columns:repeat(3,1fr);} }
-.edu-card{
-  background:var(--panel); border:1px solid var(--line); padding:28px 24px;
-  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,0 100%);
-  transition:transform .3s ease, border-color .3s ease;
-}
-.edu-card:hover{transform:translateY(-6px); border-color:var(--blue-bright);}
-.edu-years{font-family:'JetBrains Mono',monospace; color:var(--sky); font-size:0.72rem; font-weight:600; margin-bottom:16px;}
-.edu-title{font-family:'Oswald',sans-serif; font-weight:600; color:var(--white); font-size:1.02rem; margin-bottom:8px; text-transform:uppercase; line-height:1.3;}
-.edu-school{color:var(--muted); font-size:0.84rem; margin-bottom:18px;}
-.edu-cgpa{font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.7rem; color:var(--white);}
-.edu-tag{font-size:0.64rem; letter-spacing:0.1em; color:var(--violet); font-weight:700; text-transform:uppercase; margin-top:8px;}
+  /* ---------- LEADERSHIP ---------- */
+  .leadership{background:var(--sky);}
+  .lead-year-block{margin-bottom:36px;}
+  .lead-year{
+    font-family:'JetBrains Mono', monospace;
+    font-size:1.6rem; font-weight:700;
+    color:var(--navy); opacity:0.15;
+    margin-bottom:10px;
+  }
+  .lead-items{display:flex; flex-direction:column; gap:10px;}
+  .lead-item{
+    display:flex; gap:12px; align-items:flex-start;
+    background:var(--white); border:1px solid var(--line);
+    border-radius:12px; padding:14px 18px; font-size:0.92rem;
+  }
+  .lead-item::before{content:"›"; color:var(--purple); font-weight:700;}
 
-/* ---------------- ACHIEVEMENTS ---------------- */
-.ach-list{max-width:760px; margin:0 auto;}
-.ach-item{
-  display:grid; grid-template-columns:44px 1fr auto; gap:16px; align-items:center;
-  padding:18px 0; border-bottom:1px solid var(--line);
-}
-.ach-icon{
-  width:38px; height:38px;
-  background:var(--steel); border:1px solid var(--line-strong);
-  display:flex; align-items:center; justify-content:center;
-  font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:700; color:var(--sky);
-  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px);
-}
-.ach-text{font-size:0.92rem; color:#D3D8E8; line-height:1.5;}
-.ach-year{color:var(--muted-dim); font-family:'JetBrains Mono',monospace; font-size:0.72rem; font-weight:600;}
+  /* ---------- REFERENCES ---------- */
+  .ref-grid{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .ref-card{
+    background:var(--white); border:1px solid var(--line); border-radius:18px;
+    padding:30px;
+  }
+  .ref-name{font-weight:700; color:var(--navy); font-size:1.05rem; margin-bottom:4px;}
+  .ref-role{color:var(--muted); font-size:0.85rem; margin-bottom:16px; line-height:1.5;}
+  .ref-meta{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--blue); display:flex; flex-direction:column; gap:4px;}
+  @media (max-width:640px){ .ref-grid{grid-template-columns:1fr;} }
 
-/* ---------------- SKILLS ---------------- */
-.skills{background:var(--bg-alt);}
-.skills-grid{display:grid; grid-template-columns:1fr; gap:44px;}
-@media(min-width:800px){ .skills-grid{grid-template-columns:1fr 1fr; gap:60px;} }
-.skill-heading{font-size:0.82rem; color:var(--white); margin-bottom:24px; font-family:'JetBrains Mono',monospace; letter-spacing:0.1em; display:flex; align-items:center; gap:10px;}
-.skill-heading::before{content:""; width:16px; height:2px; background:var(--violet);}
-.lang-row{margin-bottom:22px;}
-.lang-top{display:flex; justify-content:space-between; font-size:0.86rem; margin-bottom:9px;}
-.lang-top span:first-child{font-weight:600; color:var(--white);}
-.lang-top span:last-child{font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--sky);}
-.bar-track{height:6px; background:var(--steel); position:relative; overflow:hidden;}
-.bar-fill{height:100%; width:0%; background:linear-gradient(90deg,var(--blue),var(--violet)); position:relative;}
-.chip-cloud{display:flex; flex-wrap:wrap; gap:9px;}
-.chip{
-  padding:9px 15px; background:var(--panel); border:1px solid var(--line-strong);
-  font-size:0.78rem; font-weight:600; color:var(--white); font-family:'JetBrains Mono',monospace;
-  clip-path:polygon(6px 0,100% 0,100% 100%,0 100%,0 6px);
-}
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--navy-deep);
+    color:#B9C4EA;
+    padding:80px 0 40px;
+    text-align:center;
+    position:relative;
+  }
+  footer h2{color:var(--white); font-size:clamp(1.8rem,4vw,2.6rem); margin-bottom:16px;}
+  footer p{max-width:480px; margin:0 auto 32px; line-height:1.7;}
+  .footer-bottom{
+    margin-top:60px; padding-top:24px; border-top:1px solid rgba(255,255,255,0.1);
+    font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:#6B7AB0;
+  }
 
-/* ---------------- STRENGTHS ---------------- */
-.strength-grid{display:grid; grid-template-columns:1fr; gap:16px;}
-@media(min-width:600px){ .strength-grid{grid-template-columns:1fr 1fr;} }
-@media(min-width:960px){ .strength-grid{grid-template-columns:repeat(3,1fr);} }
-.strength-card{
-  background:var(--panel); border:1px solid var(--line); padding:24px;
-  transition:transform .3s ease, border-color .3s ease;
-  clip-path:polygon(14px 0,100% 0,100% 100%,0 100%,0 14px);
-}
-.strength-card:hover{transform:translateY(-6px); border-color:var(--blue-bright);}
-.strength-num{font-family:'JetBrains Mono',monospace; color:var(--sky); font-size:0.7rem; font-weight:700; margin-bottom:12px;}
-.strength-card p{font-size:0.88rem; color:#D3D8E8; line-height:1.55;}
+  .reveal{opacity:0; transform:translateY(40px);}
 
-/* ---------------- LEADERSHIP ---------------- */
-.leadership{background:var(--bg-alt);}
-.lead-year-block{margin-bottom:34px;}
-.lead-year{font-family:'JetBrains Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--steel-light); margin-bottom:14px;}
-.lead-items{display:flex; flex-direction:column; gap:9px;}
-.lead-item{
-  display:flex; gap:12px; align-items:flex-start;
-  background:var(--panel); border:1px solid var(--line); padding:13px 16px; font-size:0.86rem; color:#D3D8E8;
-}
-.lead-item::before{content:"›"; color:var(--violet); font-weight:700;}
-
-/* ---------------- REFERENCES ---------------- */
-.ref-grid{display:grid; grid-template-columns:1fr; gap:20px;}
-@media(min-width:640px){ .ref-grid{grid-template-columns:1fr 1fr;} }
-.ref-card{
-  background:var(--panel); border:1px solid var(--line); padding:26px;
-  clip-path:polygon(0 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%);
-}
-.ref-name{font-family:'Oswald',sans-serif; font-weight:600; color:var(--white); font-size:1rem; text-transform:uppercase; margin-bottom:6px;}
-.ref-role{color:var(--muted); font-size:0.8rem; margin-bottom:16px; line-height:1.5;}
-.ref-meta{font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--sky); display:flex; flex-direction:column; gap:4px;}
-
-/* ---------------- FOOTER ---------------- */
-footer{background:#050710; color:var(--muted); padding:70px 0 30px; text-align:center;}
-footer h2{color:var(--white); font-size:clamp(1.6rem,6vw,2.6rem); margin-bottom:16px;}
-footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;}
-.footer-bottom{margin-top:50px; padding-top:22px; border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:var(--muted-dim);}
-
-@media (prefers-reduced-motion: reduce){
-  html{scroll-behavior:auto;}
-  .reveal{opacity:1 !important; transform:none !important;}
-  .split-inner{transform:none !important;}
-}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1 !important; transform:none !important;}
+    .scroll-cue .line{animation:none;}
+  }
 </style>
 </head>
 <body>
 
-<div id="cursorDot"></div>
-<div id="cursorRing"></div>
-
 <nav id="mainNav">
-  <div class="nav-logo"><span class="dot"></span>MZ / MOHD SUHAIMI</div>
-  <div class="nav-links">
-    <a href="#objective" data-nav>Profile</a>
-    <a href="#experience" data-nav>Experience</a>
-    <a href="#education" data-nav>Education</a>
-    <a href="#skills" data-nav>Skills</a>
-    <a href="#leadership" data-nav>Leadership</a>
-    <a href="#references" data-nav>Contact</a>
+  <div class="logo">MZ<span>/</span>MS</div>
+  <div class="navlinks">
+    <a href="#experience">Experience</a>
+    <a href="#education">Education</a>
+    <a href="#skills">Skills</a>
+    <a href="#leadership">Leadership</a>
+    <a href="#references">References</a>
   </div>
-  <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
 
-<div id="mobileMenu">
-  <a href="#objective">Profile</a>
-  <a href="#experience">Experience</a>
-  <a href="#education">Education</a>
-  <a href="#skills">Skills</a>
-  <a href="#leadership">Leadership</a>
-  <a href="#references">Contact</a>
+<div class="trace-rail" id="traceRail">
+  <div class="trace-track"></div>
+  <div class="trace-fill" id="traceFill"></div>
 </div>
 
 <!-- ================= HERO ================= -->
-<section class="hero" id="home">
-  <canvas id="heroCanvas"></canvas>
+<section class="hero">
+  <canvas id="circuitCanvas"></canvas>
   <div class="wrap hero-inner">
     <div>
-      <div class="hero-eyebrow"><span class="pulse-dot"></span>Electrical &amp; Electronics · Vocational Ed.</div>
-      <h1 id="heroTitle">Mohamad Zulhilme <span class="accent">bin Mohd Suhaimi</span></h1>
-      <p class="tagline">Bachelor of Vocational Education (Electrical &amp; Electronics) student at UTHM. Field-tested on the bench, built for the classroom. Seeking a part-time Tutor role.</p>
+      <div class="hero-eyebrow"><span class="pulse-dot"></span> Electrical &amp; Electronics · Vocational Education</div>
+      <h1>Mohamad<br>Zulhilme <span class="accent">bin Mohd Suhaimi</span></h1>
+      <p class="tagline">Bachelor of Vocational Education (Electrical &amp; Electronics) student at UTHM, wiring hands-on engineering experience into clear, patient teaching. Seeking a part-time Tutor role.</p>
       <div class="hero-stats">
-        <div class="stat-chip">CGPA <b id="cgpaCount">0.00</b></div>
-        <div class="stat-chip"><b>3×</b>&nbsp;Dean's List</div>
+        <div class="stat-chip">CGPA <b>3.59</b> / Dean's List</div>
+        <div class="stat-chip">3× <b>Dean's List</b> honouree</div>
         <div class="stat-chip"><b>Melaka</b>, Malaysia</div>
       </div>
       <div class="hero-contact">
-        <a class="btn primary magnetic" href="mailto:hilme610@gmail.com"><span class="magnetic-inner">Email — hilme610@gmail.com</span></a>
-        <a class="btn ghost magnetic" href="tel:0186642943"><span class="magnetic-inner">018-6642943</span></a>
+        <a class="contact-btn primary" href="mailto:hilme610@gmail.com">Email hilme610@gmail.com</a>
+        <a class="contact-btn ghost" href="tel:0186642943">018-6642943</a>
       </div>
     </div>
     <div class="hero-photo-wrap">
-      <div class="hero-photo-frame">
-        <img class="hero-photo" src="zul.jpg" alt="Mohamad Zulhilme bin Mohd Suhaimi">
-      </div>
+      <img class="hero-photo" src="zul.jpg" alt="Portrait of Mohamad Zulhilme bin Mohd Suhaimi">
     </div>
   </div>
   <div class="scroll-cue"><div class="line"></div>SCROLL</div>
@@ -425,33 +495,40 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
 </section>
 
 <!-- ================= EXPERIENCE ================= -->
-<section id="experience" class="exp-pin">
+<section id="experience">
   <div class="wrap">
     <div class="eyebrow">02 · Working Experience</div>
     <h2 class="section-title reveal">Where the hours went</h2>
-  </div>
-  <div class="wrap" id="expTrackWrap">
-    <div class="exp-track" id="expTrack">
+    <div class="exp-list">
       <div class="exp-card reveal">
-        <div class="exp-index">// 01</div>
-        <div class="exp-date">Aug 2023 — Jan 2024</div>
-        <div class="exp-role">Electronic Technician</div>
-        <div class="exp-company">Wintronic Sdn Bhd</div>
-        <p class="exp-desc">Coordinated and supported ATE debugging, testing, troubleshooting, and repair of new and existing devices under test (DUT), across analogue and digital schematics and electrical circuits such as load boards, probe cards, and tester cards.</p>
+        <div>
+          <div class="exp-date">Aug 2023 — Jan 2024</div>
+        </div>
+        <div>
+          <div class="exp-role">Electronic Technician</div>
+          <div class="exp-company">Wintronic Sdn Bhd</div>
+          <p class="exp-desc">Coordinated and supported ATE debugging, testing, troubleshooting, and repair of new and existing devices under test (DUT), across analogue and digital schematics and electrical circuits such as load boards, probe cards, and tester cards.</p>
+        </div>
       </div>
       <div class="exp-card reveal">
-        <div class="exp-index">// 02</div>
-        <div class="exp-date">Part-Time</div>
-        <div class="exp-role">Sales Assistant</div>
-        <div class="exp-company">HLA Garment</div>
-        <p class="exp-desc">Assisted customers with product selection and styling advice, and maintained store cleanliness and merchandise displays.</p>
+        <div>
+          <div class="exp-date">Part-Time</div>
+        </div>
+        <div>
+          <div class="exp-role">Sales Assistant</div>
+          <div class="exp-company">HLA Garment</div>
+          <p class="exp-desc">Assisted customers with product selection and styling advice, and maintained store cleanliness and merchandise displays.</p>
+        </div>
       </div>
       <div class="exp-card reveal">
-        <div class="exp-index">// 03</div>
-        <div class="exp-date">Course Project</div>
-        <div class="exp-role">Perfume Promoter</div>
-        <div class="exp-company">ZQ Perfume</div>
-        <p class="exp-desc">Promoted perfume products and explained their features to customers, while managing product display and stock during promotion.</p>
+        <div>
+          <div class="exp-date">Course Project</div>
+        </div>
+        <div>
+          <div class="exp-role">Perfume Promoter</div>
+          <div class="exp-company">ZQ Perfume</div>
+          <p class="exp-desc">Promoted perfume products and explained their features to customers, while managing product display and stock during promotion.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -481,7 +558,7 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
         <div class="edu-years">2015 — 2019</div>
         <div class="edu-title">SPM, Secondary School</div>
         <div class="edu-school">SMK Tinggi Melaka, Melaka</div>
-        <div class="edu-cgpa" style="font-size:1.15rem;">PASS</div>
+        <div class="edu-cgpa" style="font-size:1.1rem;">PASS</div>
         <div class="edu-tag">&nbsp;</div>
       </div>
     </div>
@@ -494,12 +571,36 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
     <div class="eyebrow">04 · Achievements</div>
     <h2 class="section-title reveal">Podiums and honours</h2>
     <div class="ach-list">
-      <div class="ach-item reveal"><div class="ach-icon">01</div><div class="ach-text">Vice Chancellor's Cup speech competition</div><div class="ach-year">2025</div></div>
-      <div class="ach-item reveal"><div class="ach-icon">02</div><div class="ach-text">1st Semester Dean's Award</div><div class="ach-year">2024</div></div>
-      <div class="ach-item reveal"><div class="ach-icon">03</div><div class="ach-text">Head of Department Award</div><div class="ach-year">2024</div></div>
-      <div class="ach-item reveal"><div class="ach-icon">04</div><div class="ach-text">Top 5, education-themed Final Year Project</div><div class="ach-year">2023</div></div>
-      <div class="ach-item reveal"><div class="ach-icon">05</div><div class="ach-text">Third place, Parliamentary Malay Debate Competition</div><div class="ach-year">2018</div></div>
-      <div class="ach-item reveal"><div class="ach-icon">06</div><div class="ach-text">Third place, Muar 10s Rugby Tournament</div><div class="ach-year">2018</div></div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">01</div>
+        <div class="ach-text">Vice Chancellor's Cup speech competition</div>
+        <div class="ach-year">2025</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">02</div>
+        <div class="ach-text">1st Semester Dean's Award</div>
+        <div class="ach-year">2024</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">03</div>
+        <div class="ach-text">Head of Department Award</div>
+        <div class="ach-year">2024</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">04</div>
+        <div class="ach-text">Top 5, education-themed Final Year Project</div>
+        <div class="ach-year">2023</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">05</div>
+        <div class="ach-text">Third place, Parliamentary Malay Debate Competition</div>
+        <div class="ach-year">2018</div>
+      </div>
+      <div class="ach-item reveal">
+        <div class="ach-icon">06</div>
+        <div class="ach-text">Third place, Muar 10s Rugby Tournament</div>
+        <div class="ach-year">2018</div>
+      </div>
     </div>
   </div>
 </section>
@@ -511,22 +612,42 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
     <h2 class="section-title reveal">Toolkit</h2>
     <div class="skills-grid">
       <div class="reveal">
-        <div class="skill-heading">LANGUAGE PROFICIENCY</div>
-        <div class="lang-row"><div class="lang-top"><span>Malay Language</span><span>ADVANCED</span></div><div class="bar-track"><div class="bar-fill" data-fill="95"></div></div></div>
-        <div class="lang-row"><div class="lang-top"><span>English (Speaking &amp; Writing)</span><span>ADVANCED</span></div><div class="bar-track"><div class="bar-fill" data-fill="90"></div></div></div>
-        <div class="lang-row"><div class="lang-top"><span>Japanese (Speaking &amp; Writing)</span><span>BEGINNER</span></div><div class="bar-track"><div class="bar-fill" data-fill="30"></div></div></div>
-        <div class="lang-row"><div class="lang-top"><span>Korean (Speaking &amp; Writing)</span><span>BEGINNER</span></div><div class="bar-track"><div class="bar-fill" data-fill="30"></div></div></div>
+        <h3 style="font-size:1rem; color:var(--navy); margin-bottom:22px; font-family:'JetBrains Mono',monospace; letter-spacing:0.05em;">LANGUAGE PROFICIENCY</h3>
+        <div class="lang-row">
+          <div class="lang-top"><span>Malay Language</span><span>ADVANCED</span></div>
+          <div class="bar-track"><div class="bar-fill" data-fill="95"></div></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-top"><span>English (Speaking &amp; Writing)</span><span>ADVANCED</span></div>
+          <div class="bar-track"><div class="bar-fill" data-fill="90"></div></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-top"><span>Japanese (Speaking &amp; Writing)</span><span>BEGINNER</span></div>
+          <div class="bar-track"><div class="bar-fill" data-fill="30"></div></div>
+        </div>
+        <div class="lang-row">
+          <div class="lang-top"><span>Korean (Speaking &amp; Writing)</span><span>BEGINNER</span></div>
+          <div class="bar-track"><div class="bar-fill" data-fill="30"></div></div>
+        </div>
       </div>
       <div class="reveal">
-        <div class="skill-heading">OTHER SKILLS</div>
+        <h3 style="font-size:1rem; color:var(--navy); margin-bottom:22px; font-family:'JetBrains Mono',monospace; letter-spacing:0.05em;">OTHER SKILLS</h3>
         <div class="chip-cloud">
-          <div class="chip">Programming</div><div class="chip">Database</div><div class="chip">IoT Device</div>
-          <div class="chip">Troubleshooting</div><div class="chip">MS Word</div><div class="chip">PowerPoint</div><div class="chip">Google Workspace</div>
+          <div class="chip">Programming</div>
+          <div class="chip">Database</div>
+          <div class="chip">IoT Device</div>
+          <div class="chip">Troubleshooting</div>
+          <div class="chip">MS Word</div>
+          <div class="chip">PowerPoint</div>
+          <div class="chip">Google Workspace</div>
         </div>
-        <div class="skill-heading" style="margin-top:30px;">TEACHING STRENGTHS</div>
+        <h3 style="font-size:1rem; color:var(--navy); margin:30px 0 18px; font-family:'JetBrains Mono',monospace; letter-spacing:0.05em;">TEACHING STRENGTHS</h3>
         <div class="chip-cloud">
-          <div class="chip">Clear Explainer</div><div class="chip">Classroom Mgmt</div><div class="chip">STEM Syllabus</div>
-          <div class="chip">Physical Science</div><div class="chip">Computer Science</div>
+          <div class="chip">Clear explainer</div>
+          <div class="chip">Classroom management</div>
+          <div class="chip">STEM syllabus</div>
+          <div class="chip">Physical Science</div>
+          <div class="chip">Computer Science</div>
         </div>
       </div>
     </div>
@@ -554,6 +675,7 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
   <div class="wrap">
     <div class="eyebrow">07 · Leadership &amp; Extracurricular</div>
     <h2 class="section-title reveal">Beyond the syllabus</h2>
+
     <div class="lead-year-block reveal">
       <div class="lead-year">2025</div>
       <div class="lead-items">
@@ -561,6 +683,7 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
         <div class="lead-item">Exco, Sports &amp; Recreation, Malaysian Drug Prevention Association</div>
       </div>
     </div>
+
     <div class="lead-year-block reveal">
       <div class="lead-year">2023</div>
       <div class="lead-items">
@@ -582,258 +705,176 @@ footer p{max-width:440px; margin:0 auto 30px; line-height:1.7; font-size:0.9rem;
       <div class="ref-card reveal">
         <div class="ref-name">Prof. Madya Ts. Dr Lee Ming Fong</div>
         <div class="ref-role">Lecturer, Faculty of Technical Education &amp; Vocational, UTHM Johor — Academic Advisor</div>
-        <div class="ref-meta"><span>016-2316246</span><span>mflee@uthm.edu.my</span></div>
+        <div class="ref-meta">
+          <span>016-2316246</span>
+          <span>mflee@uthm.edu.my</span>
+        </div>
       </div>
       <div class="ref-card reveal">
         <div class="ref-name">Siti Zulia binti Pirin</div>
         <div class="ref-role">Lecturer, Electrical Engineering Department, PMM Melaka — Academic Supervisor, Final Year Project</div>
-        <div class="ref-meta"><span>019-3839200</span><span>sitizulia@staff.pmm.edu.my</span></div>
+        <div class="ref-meta">
+          <span>019-3839200</span>
+          <span>sitizulia@staff.pmm.edu.my</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ================= FOOTER ================= -->
-<footer id="contact-footer">
+<footer>
   <div class="wrap">
     <h2>Let's connect the circuit.</h2>
-    <p>Open to part-time tutoring opportunities in electrical, electronics, and STEM subjects. Reach out below.</p>
+    <p>Open to part-time tutoring opportunities in electrical, electronics, and STEM subjects. Reach out by phone or email below.</p>
     <div class="hero-contact" style="justify-content:center;">
-      <a class="btn primary magnetic" href="mailto:hilme610@gmail.com"><span class="magnetic-inner">hilme610@gmail.com</span></a>
-      <a class="btn ghost magnetic" href="tel:0186642943"><span class="magnetic-inner">018-6642943</span></a>
+      <a class="contact-btn primary" href="mailto:hilme610@gmail.com">hilme610@gmail.com</a>
+      <a class="contact-btn ghost" href="tel:0186642943">018-6642943</a>
     </div>
-    <div class="footer-bottom">NO 8524, JALAN PERMATANG PASIR, 75460 ALAI MELAKA · MOHAMAD ZULHILME BIN MOHD SUHAIMI</div>
+    <div class="footer-bottom">No 8524, Jalan Permatang Pasir, 75460 Alai Melaka · Mohamad Zulhilme bin Mohd Suhaimi</div>
   </div>
 </footer>
 
 <script>
 gsap.registerPlugin(ScrollTrigger);
-const isTouch = window.matchMedia('(hover:none), (pointer:coarse)').matches;
-const isDesktop = window.innerWidth >= 960;
 
-/* ================= CUSTOM CURSOR ================= */
-if(!isTouch){
-  const dot = document.getElementById('cursorDot');
-  const ring = document.getElementById('cursorRing');
-  let mx=0,my=0, rx=0, ry=0;
-  window.addEventListener('mousemove', e=>{
-    mx = e.clientX; my = e.clientY;
-    gsap.to(dot, {x:mx, y:my, duration:0.05});
-  });
-  gsap.ticker.add(()=>{
-    rx += (mx-rx)*0.15; ry += (my-ry)*0.15;
-    gsap.set(ring, {x:rx, y:ry});
-  });
+/* ---------- Nav reveal ---------- */
+gsap.to("#mainNav", {
+  y:0, duration:0.6, ease:"power2.out",
+  scrollTrigger:{ trigger:"body", start:"200px top", toggleActions:"play none none reverse" }
+});
+
+/* ---------- Circuit-board canvas (hero background) ---------- */
+const canvas = document.getElementById('circuitCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, nodes = [], pulses = [];
+
+function resizeCanvas(){
+  W = canvas.width = canvas.offsetWidth;
+  H = canvas.height = canvas.offsetHeight;
+  buildGrid();
 }
 
-/* ================= NAV: scroll shrink + active link ================= */
-const navSections = ['home','objective','experience','education','skills','leadership','references'];
-navSections.forEach(id=>{
-  const el = document.getElementById(id);
-  if(!el) return;
-  ScrollTrigger.create({
-    trigger:el, start:'top 45%', end:'bottom 45%',
-    onEnter:()=>setActive(id), onEnterBack:()=>setActive(id)
-  });
-});
-function setActive(id){
-  document.querySelectorAll('[data-nav]').forEach(a=>{
-    a.classList.toggle('active', a.getAttribute('href') === '#'+id);
-  });
-}
-
-/* ================= MOBILE MENU ================= */
-const burger = document.getElementById('burgerBtn');
-const menu = document.getElementById('mobileMenu');
-const menuLinks = menu.querySelectorAll('a');
-let menuOpen = false;
-burger.addEventListener('click', ()=>{
-  menuOpen = !menuOpen;
-  burger.classList.toggle('open', menuOpen);
-  if(menuOpen){
-    menu.classList.add('open');
-    document.body.style.overflow='hidden';
-    gsap.to(menu, {opacity:1, duration:0.35});
-    gsap.to(menuLinks, {opacity:1, y:0, duration:0.5, stagger:0.06, delay:0.1, ease:'power3.out'});
-  } else {
-    document.body.style.overflow='';
-    gsap.to(menuLinks, {opacity:0, y:24, duration:0.25});
-    gsap.to(menu, {opacity:0, duration:0.3, delay:0.1, onComplete:()=>menu.classList.remove('open')});
-  }
-});
-menuLinks.forEach(l=>l.addEventListener('click', ()=>{ burger.click(); }));
-
-/* ================= HERO TITLE SPLIT REVEAL ================= */
-const heroTitle = document.getElementById('heroTitle');
-const words = heroTitle.innerHTML.split(' ');
-heroTitle.innerHTML = words.map(w => `<span class="split-word"><span class="split-inner">${w}</span></span>`).join(' ');
-gsap.to('.split-inner', {y:'0%', duration:1, stagger:0.06, ease:'power4.out', delay:0.3});
-gsap.from('.hero-eyebrow, .hero p.tagline, .hero-stats, .hero-contact, .hero-photo-frame', {
-  opacity:0, y:24, duration:0.9, stagger:0.12, delay:0.6, ease:'power3.out'
-});
-
-/* ================= CGPA COUNT-UP ================= */
-const cgpaObj = {v:0};
-gsap.to(cgpaObj, {
-  v:3.59, duration:2, delay:1, ease:'power2.out',
-  onUpdate:()=>{ document.getElementById('cgpaCount').textContent = cgpaObj.v.toFixed(2); }
-});
-
-/* ================= MAGNETIC BUTTONS ================= */
-if(!isTouch){
-  document.querySelectorAll('.magnetic').forEach(btn=>{
-    btn.addEventListener('mousemove', e=>{
-      const r = btn.getBoundingClientRect();
-      const x = e.clientX - r.left - r.width/2;
-      const y = e.clientY - r.top - r.height/2;
-      gsap.to(btn, {x:x*0.25, y:y*0.5, duration:0.3, ease:'power2.out'});
-      gsap.to(btn.querySelector('.magnetic-inner'), {x:x*0.15, y:y*0.25, duration:0.3});
-    });
-    btn.addEventListener('mouseleave', ()=>{
-      gsap.to(btn, {x:0,y:0, duration:0.5, ease:'elastic.out(1,0.4)'});
-      gsap.to(btn.querySelector('.magnetic-inner'), {x:0,y:0, duration:0.5, ease:'elastic.out(1,0.4)'});
-    });
-  });
-}
-
-/* ================= REVEAL ON SCROLL ================= */
-gsap.utils.toArray('.reveal').forEach(el=>{
-  gsap.to(el, {
-    opacity:1, y:0, duration:0.9, ease:'power3.out',
-    scrollTrigger:{ trigger:el, start:'top 88%', toggleActions:'play none none reverse' }
-  });
-});
-
-/* ================= SKILL BARS ================= */
-gsap.utils.toArray('.bar-fill').forEach(bar=>{
-  gsap.to(bar, {
-    width: bar.dataset.fill + '%', duration:1.3, ease:'power3.out',
-    scrollTrigger:{ trigger:bar, start:'top 92%', toggleActions:'play none none reverse' }
-  });
-});
-
-/* ================= EXPERIENCE HORIZONTAL SCROLL (desktop only) ================= */
-if(isDesktop){
-  const track = document.getElementById('expTrack');
-  const wrap = document.getElementById('expTrackWrap');
-  function initHorizontal(){
-    const scrollDist = track.scrollWidth - wrap.clientWidth;
-    if(scrollDist > 0){
-      gsap.to(track, {
-        x: -scrollDist, ease:'none',
-        scrollTrigger:{
-          trigger:'#experience', start:'top top', end:()=>'+='+(scrollDist+400),
-          scrub:0.6, pin:true, anticipatePin:1, invalidateOnRefresh:true
-        }
+function buildGrid(){
+  nodes = [];
+  const cols = Math.max(6, Math.floor(W/140));
+  const rows = Math.max(4, Math.floor(H/140));
+  for(let i=0;i<=cols;i++){
+    for(let j=0;j<=rows;j++){
+      nodes.push({
+        x:(W/cols)*i + (Math.random()*40-20),
+        y:(H/rows)*j + (Math.random()*40-20)
       });
     }
   }
-  window.addEventListener('load', initHorizontal);
+  pulses = [];
+  for(let i=0;i<14;i++){
+    const a = nodes[Math.floor(Math.random()*nodes.length)];
+    const b = nodes[Math.floor(Math.random()*nodes.length)];
+    pulses.push({a, b, t:Math.random(), speed:0.002+Math.random()*0.003});
+  }
 }
 
-/* ================= THREE.JS HERO BACKGROUND ================= */
-(function(){
-  const canvas = document.getElementById('heroCanvas');
-  const heroSection = document.querySelector('.hero');
-  const renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(55, heroSection.clientWidth/heroSection.clientHeight, 0.1, 1000);
-  camera.position.z = 26;
-
-  function setSize(){
-    const w = heroSection.clientWidth, h = heroSection.clientHeight;
-    renderer.setSize(w,h);
-    camera.aspect = w/h;
-    camera.updateProjectionMatrix();
-  }
-  setSize();
-
-  const group = new THREE.Group();
-  scene.add(group);
-
-  /* central wireframe icosahedron */
-  const icoGeo = new THREE.IcosahedronGeometry(7.2, 1);
-  const icoMat = new THREE.MeshBasicMaterial({color:0x3B7BFF, wireframe:true, transparent:true, opacity:0.35});
-  const ico = new THREE.Mesh(icoGeo, icoMat);
-  group.add(ico);
-
-  const icoGeo2 = new THREE.IcosahedronGeometry(9.5, 1);
-  const icoMat2 = new THREE.MeshBasicMaterial({color:0x8B5CF6, wireframe:true, transparent:true, opacity:0.18});
-  const ico2 = new THREE.Mesh(icoGeo2, icoMat2);
-  group.add(ico2);
-
-  /* point network */
-  const pointCount = isDesktop ? 90 : 45;
-  const positions = new Float32Array(pointCount*3);
-  const velocities = [];
-  for(let i=0;i<pointCount;i++){
-    positions[i*3]   = (Math.random()-0.5)*46;
-    positions[i*3+1] = (Math.random()-0.5)*30;
-    positions[i*3+2] = (Math.random()-0.5)*20 - 4;
-    velocities.push({x:(Math.random()-0.5)*0.01, y:(Math.random()-0.5)*0.01});
-  }
-  const ptGeo = new THREE.BufferGeometry();
-  ptGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
-  const ptMat = new THREE.PointsMaterial({color:0x6C9CFF, size:0.28, transparent:true, opacity:0.85});
-  const points = new THREE.Points(ptGeo, ptMat);
-  group.add(points);
-
-  const lineMat = new THREE.LineBasicMaterial({color:0x5B6480, transparent:true, opacity:0.18});
-  let lineSegments = new THREE.LineSegments(new THREE.BufferGeometry(), lineMat);
-  group.add(lineSegments);
-
-  function updateLines(){
-    const pos = ptGeo.attributes.position.array;
-    const verts = [];
-    const maxDist = 8.5;
-    for(let i=0;i<pointCount;i++){
-      for(let j=i+1;j<pointCount;j++){
-        const dx = pos[i*3]-pos[j*3], dy = pos[i*3+1]-pos[j*3+1], dz = pos[i*3+2]-pos[j*3+2];
-        const d = Math.sqrt(dx*dx+dy*dy+dz*dz);
-        if(d < maxDist){
-          verts.push(pos[i*3],pos[i*3+1],pos[i*3+2], pos[j*3],pos[j*3+1],pos[j*3+2]);
-        }
+function drawCircuit(){
+  ctx.clearRect(0,0,W,H);
+  ctx.strokeStyle = 'rgba(91,127,255,0.12)';
+  ctx.lineWidth = 1;
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      const dx = nodes[i].x-nodes[j].x, dy = nodes[i].y-nodes[j].y;
+      const d = Math.sqrt(dx*dx+dy*dy);
+      if(d < 160){
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x, nodes[i].y);
+        ctx.lineTo(nodes[j].x, nodes[j].y);
+        ctx.stroke();
       }
     }
-    lineSegments.geometry.dispose();
-    lineSegments.geometry = new THREE.BufferGeometry();
-    lineSegments.geometry.setAttribute('position', new THREE.Float32BufferAttribute(verts,3));
   }
-  updateLines();
-
-  let mouseX = 0, mouseY = 0;
-  window.addEventListener('mousemove', e=>{
-    mouseX = (e.clientX/window.innerWidth - 0.5);
-    mouseY = (e.clientY/window.innerHeight - 0.5);
+  nodes.forEach(n=>{
+    ctx.beginPath();
+    ctx.arc(n.x, n.y, 1.6, 0, Math.PI*2);
+    ctx.fillStyle = 'rgba(139,92,246,0.35)';
+    ctx.fill();
   });
+  pulses.forEach(p=>{
+    p.t += p.speed;
+    if(p.t > 1){ p.t = 0; p.a = nodes[Math.floor(Math.random()*nodes.length)]; p.b = nodes[Math.floor(Math.random()*nodes.length)]; }
+    const x = p.a.x + (p.b.x-p.a.x)*p.t;
+    const y = p.a.y + (p.b.y-p.a.y)*p.t;
+    const grad = ctx.createRadialGradient(x,y,0,x,y,10);
+    grad.addColorStop(0,'rgba(140,170,255,0.9)');
+    grad.addColorStop(1,'rgba(140,170,255,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(x,y,10,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(drawCircuit);
+}
 
-  let frame = 0;
-  function animate(){
-    requestAnimationFrame(animate);
-    frame++;
-    ico.rotation.x += 0.0016; ico.rotation.y += 0.0022;
-    ico2.rotation.x -= 0.001; ico2.rotation.y -= 0.0014;
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+drawCircuit();
 
-    const pos = ptGeo.attributes.position.array;
-    for(let i=0;i<pointCount;i++){
-      pos[i*3]   += velocities[i].x;
-      pos[i*3+1] += velocities[i].y;
-      if(Math.abs(pos[i*3]) > 23) velocities[i].x *= -1;
-      if(Math.abs(pos[i*3+1]) > 15) velocities[i].y *= -1;
-    }
-    ptGeo.attributes.position.needsUpdate = true;
-    if(frame % 6 === 0) updateLines();
+/* ---------- Reveal-on-scroll for content blocks ---------- */
+gsap.utils.toArray('.reveal').forEach((el, i)=>{
+  gsap.to(el, {
+    opacity:1, y:0, duration:0.9, ease:"power3.out",
+    scrollTrigger:{ trigger:el, start:"top 85%", toggleActions:"play none none reverse" }
+  });
+});
 
-    group.rotation.y += (mouseX*0.4 - group.rotation.y) * 0.02;
-    group.rotation.x += (mouseY*0.2 - group.rotation.x) * 0.02;
+/* ---------- Skill bars ---------- */
+gsap.utils.toArray('.bar-fill').forEach(bar=>{
+  gsap.to(bar, {
+    width: bar.dataset.fill + "%",
+    duration:1.4, ease:"power3.out",
+    scrollTrigger:{ trigger:bar, start:"top 90%", toggleActions:"play none none reverse" }
+  });
+});
 
-    renderer.render(scene, camera);
+/* ---------- Vertical trace fill synced to page scroll ---------- */
+function setTraceHeight(){
+  document.getElementById('traceRail').style.display = window.innerWidth < 900 ? 'none' : 'block';
+}
+setTraceHeight();
+window.addEventListener('resize', setTraceHeight);
+
+gsap.to("#traceFill", {
+  height:"100%",
+  ease:"none",
+  scrollTrigger:{
+    trigger:"body",
+    start:"top top",
+    end:"bottom bottom",
+    scrub:0.4
   }
-  animate();
+});
 
-  window.addEventListener('resize', ()=>{ setSize(); });
-})();
+/* Nodes along the trace, one per section, lighting up on entry */
+const sections = ['objective','experience','education','achievements','skills','teaching','leadership','references'];
+const rail = document.getElementById('traceRail');
+sections.forEach((id, i)=>{
+  const target = document.getElementById(id);
+  if(!target) return;
+  const node = document.createElement('div');
+  node.className = 'trace-node';
+  rail.appendChild(node);
+  ScrollTrigger.create({
+    trigger: target,
+    start:"top 60%",
+    end:"bottom 40%",
+    onEnter:()=> node.classList.add('lit'),
+    onLeaveBack:()=> node.classList.remove('lit'),
+    onUpdate:(self)=>{
+      const rect = target.getBoundingClientRect();
+      const railRect = rail.getBoundingClientRect();
+      const centerY = rect.top + rect.height/2 - railRect.top;
+      node.style.top = centerY + 'px';
+    }
+  });
+});
 
 ScrollTrigger.refresh();
 </script>
