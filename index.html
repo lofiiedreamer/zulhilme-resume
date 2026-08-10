@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mohamad Zulhilme | Interactive Resume</title>
     
     <!-- Fonts -->
@@ -28,7 +28,7 @@
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- GSAP & Lenis for Smooth Scrolling & Advanced Animations -->
+    <!-- GSAP & Lenis -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://unpkg.com/@studio-freight/lenis@1.0.32/dist/lenis.min.js"></script>
@@ -39,7 +39,8 @@
             background: #f8fafc;
             color: #0f172a;
             overflow-x: hidden;
-            cursor: none; /* Hide default cursor for custom cursor */
+            cursor: none; 
+            width: 100vw;
         }
         
         /* Custom Cursor */
@@ -59,17 +60,24 @@
             width: 60px; height: 60px; background: rgba(59, 130, 246, 0.1);
         }
 
+        /* Disable custom cursor and hover effects on mobile/touch devices */
+        @media (hover: none) and (pointer: coarse) {
+            .cursor-dot, .cursor-outline { display: none !important; }
+            body, * { cursor: auto !important; }
+            .glass-card:hover { transform: none !important; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05) !important; border-color: rgba(255, 255, 255, 0.8) !important; }
+            .marquee-item:hover { color: transparent !important; -webkit-text-stroke: 1px #94a3b8 !important; text-shadow: none !important; }
+        }
+
         /* Abstract Dynamic Background */
         .bg-shapes { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; overflow: hidden; pointer-events: none; }
-        .shape { position: absolute; filter: blur(120px); border-radius: 50%; animation: float 25s infinite ease-in-out alternate; }
-        .shape-1 { background: rgba(59, 130, 246, 0.25); width: 60vw; height: 60vw; top: -20%; left: -10%; }
-        .shape-2 { background: rgba(147, 51, 234, 0.2); width: 50vw; height: 50vw; bottom: -20%; right: -10%; animation-delay: -5s; }
-        .shape-3 { background: rgba(186, 230, 253, 0.4); width: 40vw; height: 40vw; top: 30%; left: 30%; animation-delay: -10s; }
+        .shape { position: absolute; filter: blur(100px); border-radius: 50%; animation: float 25s infinite ease-in-out alternate; }
+        .shape-1 { background: rgba(59, 130, 246, 0.25); width: 80vw; height: 80vw; top: -10%; left: -20%; }
+        .shape-2 { background: rgba(147, 51, 234, 0.2); width: 70vw; height: 70vw; bottom: -10%; right: -20%; animation-delay: -5s; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(5%, 10%) scale(1.1); }
-            100% { transform: translate(-5%, -10%) scale(0.9); }
+            50% { transform: translate(5%, 5%) scale(1.05); }
+            100% { transform: translate(-5%, -5%) scale(0.95); }
         }
 
         /* Premium Text Gradients */
@@ -85,20 +93,15 @@
 
         /* Glassmorphism Classes */
         .glass {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            box-shadow: 0 15px 35px -12px rgba(0, 0, 0, 0.05);
         }
         
         .glass-card {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .glass-card:hover {
-            transform: translateY(-8px) scale(1.01);
-            box-shadow: 0 30px 60px -12px rgba(99, 102, 241, 0.15);
-            border-color: rgba(147, 51, 234, 0.3);
         }
 
         /* Hero Text Animation setup */
@@ -107,38 +110,39 @@
 
         /* Infinite Marquee */
         .marquee-wrapper {
-            position: relative; width: 100%; overflow: hidden; padding: 3rem 0;
-            background: rgba(255, 255, 255, 0.3);
+            position: relative; width: 100vw; overflow: hidden; padding: 2rem 0;
+            background: rgba(255, 255, 255, 0.4);
             border-top: 1px solid rgba(255,255,255,0.5);
             border-bottom: 1px solid rgba(255,255,255,0.5);
-            transform: rotate(-2deg) scale(1.05);
+            transform: rotate(-3deg) scale(1.1);
             z-index: 10;
         }
-        .marquee-content { display: flex; white-space: nowrap; animation: marquee 20s linear infinite; }
+        .marquee-content { display: flex; white-space: nowrap; animation: marquee 15s linear infinite; }
         .marquee-item {
-            font-size: 3rem; font-weight: 800; text-transform: uppercase; padding: 0 2rem;
+            font-size: 2rem; font-weight: 800; text-transform: uppercase; padding: 0 1rem;
             color: transparent; -webkit-text-stroke: 1px #94a3b8; transition: 0.3s;
         }
-        .marquee-item:hover { color: #3b82f6; -webkit-text-stroke: 0px; text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+        @media (min-width: 768px) {
+            .marquee-item { font-size: 3rem; padding: 0 2rem; }
+            .marquee-wrapper { padding: 3rem 0; transform: rotate(-2deg) scale(1.05); }
+        }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* Bento Grid */
-        .bento-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1.5rem; }
-        
         /* Timeline */
-        .timeline-container { position: relative; padding-left: 2rem; }
-        .timeline-line { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(147, 51, 234, 0.1); }
+        .timeline-container { position: relative; padding-left: 1.5rem; }
+        .timeline-line { position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(147, 51, 234, 0.15); }
         .timeline-progress { position: absolute; left: 0; top: 0; width: 2px; background: linear-gradient(to bottom, #3b82f6, #9333ea); transform-origin: top; transform: scaleY(0); }
         .timeline-dot { position: absolute; left: -5px; width: 12px; height: 12px; border-radius: 50%; background: white; border: 2px solid #9333ea; z-index: 2; transition: all 0.3s; }
-        .timeline-item:hover .timeline-dot { transform: scale(1.5); background: #3b82f6; border-color: white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+        .timeline-item:active .timeline-dot { transform: scale(1.3); background: #3b82f6; }
 
-        /* Utilities */
-        .clip-text { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+        @media (min-width: 768px) {
+            .timeline-container { padding-left: 2rem; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Custom Cursor -->
+    <!-- Custom Cursor (Hidden on Mobile via CSS) -->
     <div class="cursor-dot"></div>
     <div class="cursor-outline"></div>
 
@@ -146,14 +150,13 @@
     <div class="bg-shapes">
         <div class="shape shape-1"></div>
         <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full z-50 p-6 mix-blend-difference text-white">
+    <nav class="fixed top-0 w-full z-50 p-4 md:p-6 mix-blend-difference text-white">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="font-bold text-xl tracking-tighter">MZ.</div>
-            <div class="flex gap-6 text-sm font-medium">
+            <div class="font-bold text-lg md:text-xl tracking-tighter">MZ.</div>
+            <div class="flex gap-4 md:gap-6 text-xs md:text-sm font-medium">
                 <a href="#about" class="hover:text-blue-300 transition">About</a>
                 <a href="#experience" class="hover:text-blue-300 transition">Experience</a>
                 <a href="#contact" class="hover:text-blue-300 transition">Contact</a>
@@ -161,64 +164,66 @@
         </div>
     </nav>
 
-    <main class="relative z-10">
+    <main class="relative z-10 w-full overflow-hidden">
         
         <!-- HERO SECTION -->
-        <section class="min-h-screen flex items-center justify-center pt-20 pb-12 px-4 relative overflow-hidden">
-            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <section class="min-h-[100svh] flex flex-col justify-center pt-24 pb-12 px-4 md:px-6 relative w-full">
+            <div class="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12 items-center">
                 
                 <!-- Text Content -->
-                <div class="space-y-6 z-10">
-                    <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-semibold text-purple-700 opacity-0 transform translate-y-4">
-                        <span class="relative flex h-3 w-3">
+                <div class="space-y-5 z-10 order-2 lg:order-1 mt-4 lg:mt-0">
+                    <div class="hero-badge inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-full glass text-xs md:text-sm font-semibold text-purple-700 opacity-0 transform translate-y-4">
+                        <span class="relative flex h-2.5 w-2.5">
                           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-                          <span class="relative inline-flex rounded-full h-3 w-3 bg-purple-500"></span>
+                          <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-purple-500"></span>
                         </span>
                         Available for Work
                     </div>
                     
-                    <h1 class="text-6xl md:text-8xl font-black tracking-tight leading-[1.1]">
-                        <div class="hero-title-word"><span class="hero-title-char">Hi,</span></div>
-                        <div class="hero-title-word"><span class="hero-title-char">I'm</span></div><br>
-                        <div class="hero-title-word text-gradient pb-2"><span class="hero-title-char">Mohamad</span></div>
-                        <div class="hero-title-word text-gradient pb-2"><span class="hero-title-char">Zulhilme.</span></div>
+                    <h1 class="text-[3.25rem] leading-[1.1] md:text-7xl lg:text-8xl font-black tracking-tight flex flex-wrap md:block">
+                        <div class="hero-title-word mr-3 md:mr-0"><span class="hero-title-char">Hi,</span></div>
+                        <div class="hero-title-word"><span class="hero-title-char">I'm</span></div><br class="hidden md:block">
+                        <div class="w-full flex flex-col md:block mt-1 md:mt-0">
+                            <div class="hero-title-word text-gradient pb-1 md:pb-2"><span class="hero-title-char">Mohamad</span></div>
+                            <div class="hero-title-word text-gradient pb-1 md:pb-2"><span class="hero-title-char">Zulhilme.</span></div>
+                        </div>
                     </h1>
                     
-                    <p class="text-xl md:text-2xl text-slate-600 max-w-lg leading-relaxed font-light hero-subtitle opacity-0">
+                    <p class="text-lg md:text-2xl text-slate-600 max-w-lg leading-relaxed font-light hero-subtitle opacity-0">
                         An aspiring <strong class="font-semibold text-slate-800">Vocational Educator</strong> in Electrical & Electronics, passionate about bridging the gap between theory and practical excellence.
                     </p>
 
-                    <div class="flex flex-wrap gap-4 pt-4 hero-buttons opacity-0">
-                        <a href="#contact" class="px-8 py-4 bg-slate-900 text-white rounded-full font-semibold hover:bg-blue-600 transition-colors shadow-lg hover:shadow-blue-500/30 flex items-center gap-2 group">
+                    <div class="flex flex-col sm:flex-row gap-3 md:gap-4 pt-2 hero-buttons opacity-0 w-full sm:w-auto">
+                        <a href="#contact" class="px-6 py-3.5 md:px-8 md:py-4 bg-slate-900 text-white rounded-full font-semibold hover:bg-blue-600 transition-colors shadow-lg flex justify-center items-center gap-2 group w-full sm:w-auto">
                             Contact Me <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="#experience" class="px-8 py-4 glass rounded-full font-semibold text-slate-800 hover:bg-white/80 transition-colors flex items-center gap-2">
+                        <a href="#experience" class="px-6 py-3.5 md:px-8 md:py-4 glass rounded-full font-semibold text-slate-800 flex justify-center items-center gap-2 w-full sm:w-auto">
                             View Work <i data-lucide="chevron-down" class="w-4 h-4"></i>
                         </a>
                     </div>
                 </div>
 
                 <!-- Floating Profile Image -->
-                <div class="relative w-full max-w-md mx-auto lg:ml-auto hero-image-container opacity-0 scale-95">
-                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-400 to-purple-500 rounded-[2rem] transform rotate-6 blur-xl opacity-30 animate-pulse"></div>
-                    <div class="glass p-4 rounded-[2.5rem] transform -rotate-2 hover:rotate-0 transition-transform duration-700 ease-out">
-                        <img src="zul.jpg" alt="Zulhilme" onerror="this.src='https://ui-avatars.com/api/?name=Mohamad+Zulhilme&background=e0e7ff&color=3730a3&size=512'" class="w-full h-[500px] object-cover rounded-[2rem] shadow-2xl grayscale-[20%] hover:grayscale-0 transition-all duration-700">
+                <div class="relative w-full max-w-[280px] md:max-w-md mx-auto order-1 lg:order-2 hero-image-container opacity-0 scale-95 mt-4 md:mt-0">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-400 to-purple-500 rounded-[2rem] md:rounded-[2.5rem] transform rotate-3 md:rotate-6 blur-lg md:blur-xl opacity-40 animate-pulse"></div>
+                    <div class="glass p-3 md:p-4 rounded-[2rem] md:rounded-[2.5rem] transform -rotate-2">
+                        <img src="src/imports/zul.jpg" alt="Zulhilme" onerror="this.src='https://ui-avatars.com/api/?name=Mohamad+Zulhilme&background=e0e7ff&color=3730a3&size=512'" class="w-full aspect-[4/5] object-cover rounded-[1.5rem] md:rounded-[2rem] shadow-xl grayscale-[15%]">
                     </div>
                     
-                    <!-- Floating floating badges -->
-                    <div class="absolute -left-8 top-20 glass px-6 py-4 rounded-2xl flex items-center gap-3 parallax-element" data-speed="-0.05">
-                        <i data-lucide="award" class="w-8 h-8 text-blue-500"></i>
+                    <!-- Floating badges (Optimized for Mobile) -->
+                    <div class="absolute -left-2 md:-left-8 top-10 md:top-20 glass px-3 md:px-6 py-2 md:py-4 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 parallax-element origin-left z-20" data-speed="-0.03">
+                        <i data-lucide="award" class="w-5 h-5 md:w-8 md:h-8 text-blue-500"></i>
                         <div>
-                            <p class="text-sm font-bold text-slate-900">3.59 CGPA</p>
-                            <p class="text-xs text-slate-500">Dean's List</p>
+                            <p class="text-xs md:text-sm font-bold text-slate-900 leading-tight">3.59 CGPA</p>
+                            <p class="text-[10px] md:text-xs text-slate-500">Dean's List</p>
                         </div>
                     </div>
                     
-                    <div class="absolute -right-8 bottom-20 glass px-6 py-4 rounded-2xl flex items-center gap-3 parallax-element" data-speed="0.05">
-                        <i data-lucide="zap" class="w-8 h-8 text-purple-500"></i>
+                    <div class="absolute -right-2 md:-right-8 bottom-10 md:bottom-20 glass px-3 md:px-6 py-2 md:py-4 rounded-xl md:rounded-2xl flex items-center gap-2 md:gap-3 parallax-element origin-right z-20" data-speed="0.04">
+                        <i data-lucide="zap" class="w-5 h-5 md:w-8 md:h-8 text-purple-500"></i>
                         <div>
-                            <p class="text-sm font-bold text-slate-900">IoT Expert</p>
-                            <p class="text-xs text-slate-500">Electronics</p>
+                            <p class="text-xs md:text-sm font-bold text-slate-900 leading-tight">IoT Expert</p>
+                            <p class="text-[10px] md:text-xs text-slate-500">Electronics</p>
                         </div>
                     </div>
                 </div>
@@ -254,66 +259,66 @@
         </div>
 
         <!-- BENTO GRID (About & Skills) -->
-        <section id="about" class="py-24 px-4 max-w-7xl mx-auto">
-            <div class="mb-12 gs-reveal">
-                <h2 class="text-4xl font-bold tracking-tight">The <span class="text-gradient">Bento</span>.</h2>
-                <p class="text-slate-500 mt-2">Objective, Strengths, and Linguistics.</p>
+        <section id="about" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto w-full">
+            <div class="mb-10 gs-reveal">
+                <h2 class="text-3xl md:text-4xl font-bold tracking-tight">The <span class="text-gradient">Bento</span>.</h2>
+                <p class="text-slate-500 mt-2 text-sm md:text-base">Objective, Strengths, and Linguistics.</p>
             </div>
 
-            <div class="bento-grid">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
                 
-                <!-- Objective Card (Large) -->
-                <div class="glass glass-card rounded-3xl p-8 col-span-12 lg:col-span-8 flex flex-col justify-center relative overflow-hidden group gs-reveal">
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl group-hover:bg-blue-400/20 transition-colors"></div>
-                    <i data-lucide="target" class="w-10 h-10 text-blue-500 mb-6"></i>
-                    <h3 class="text-2xl font-bold mb-4">Professional Objective</h3>
-                    <p class="text-lg text-slate-600 leading-relaxed font-light">
+                <!-- Objective Card -->
+                <div class="glass glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 col-span-1 lg:col-span-8 flex flex-col justify-center relative overflow-hidden gs-reveal">
+                    <div class="absolute -top-10 -right-10 w-48 h-48 bg-blue-400/10 rounded-full blur-2xl"></div>
+                    <i data-lucide="target" class="w-8 h-8 md:w-10 md:h-10 text-blue-500 mb-4 md:mb-6 relative z-10"></i>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 relative z-10">Professional Objective</h3>
+                    <p class="text-base md:text-lg text-slate-600 leading-relaxed font-light relative z-10">
                         Passionate about teaching and helping students achieve academic excellence. Strong communication, leadership, and interpersonal skills with experience in handling educational and public engagement activities. Seeking a Tutor position to contribute knowledge while developing practical teaching experience.
                     </p>
                 </div>
 
                 <!-- Languages Card -->
-                <div class="glass glass-card rounded-3xl p-8 col-span-12 md:col-span-6 lg:col-span-4 gs-reveal">
-                    <i data-lucide="languages" class="w-8 h-8 text-purple-500 mb-6"></i>
-                    <h3 class="text-xl font-bold mb-6">Languages</h3>
+                <div class="glass glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 col-span-1 lg:col-span-4 gs-reveal">
+                    <i data-lucide="languages" class="w-8 h-8 text-purple-500 mb-4 md:mb-6"></i>
+                    <h3 class="text-lg md:text-xl font-bold mb-5">Languages</h3>
                     <div class="space-y-4">
                         <div>
-                            <div class="flex justify-between text-sm font-medium mb-1"><span class="text-slate-700">Malay</span> <span class="text-purple-600">Advanced</span></div>
-                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-purple-500 w-[95%]"></div></div>
+                            <div class="flex justify-between text-sm font-medium mb-1.5"><span class="text-slate-700">Malay</span> <span class="text-purple-600">Advanced</span></div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-purple-500 w-[95%] rounded-full"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-sm font-medium mb-1"><span class="text-slate-700">English</span> <span class="text-purple-600">Advanced</span></div>
-                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-purple-500 w-[85%]"></div></div>
+                            <div class="flex justify-between text-sm font-medium mb-1.5"><span class="text-slate-700">English</span> <span class="text-purple-600">Advanced</span></div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-purple-500 w-[85%] rounded-full"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-sm font-medium mb-1"><span class="text-slate-700">Japanese</span> <span class="text-slate-400">Beginner</span></div>
-                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400 w-[30%]"></div></div>
+                            <div class="flex justify-between text-sm font-medium mb-1.5"><span class="text-slate-700">Japanese</span> <span class="text-slate-400">Beginner</span></div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400 w-[30%] rounded-full"></div></div>
                         </div>
                         <div>
-                            <div class="flex justify-between text-sm font-medium mb-1"><span class="text-slate-700">Korean</span> <span class="text-slate-400">Beginner</span></div>
-                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400 w-[30%]"></div></div>
+                            <div class="flex justify-between text-sm font-medium mb-1.5"><span class="text-slate-700">Korean</span> <span class="text-slate-400">Beginner</span></div>
+                            <div class="h-1.5 w-full bg-slate-200 rounded-full overflow-hidden"><div class="h-full bg-slate-400 w-[30%] rounded-full"></div></div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Strengths Matrix -->
-                <div class="glass glass-card rounded-3xl p-8 col-span-12 gs-reveal">
-                    <div class="flex items-center gap-3 mb-8">
-                        <i data-lucide="zap" class="w-8 h-8 text-blue-500"></i>
-                        <h3 class="text-xl font-bold">Teaching Strengths</h3>
+                <div class="glass glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 col-span-1 lg:col-span-12 gs-reveal">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="zap" class="w-6 h-6 md:w-8 md:h-8 text-blue-500"></i>
+                        <h3 class="text-lg md:text-xl font-bold">Teaching Strengths</h3>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="p-4 bg-white/40 rounded-2xl border border-white hover:bg-white/60 transition-colors">
-                            <h4 class="font-bold text-slate-800 mb-1">Clear Communication</h4>
-                            <p class="text-sm text-slate-500">Explain concepts clearly and patiently with strong presentation skills.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+                        <div class="p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white">
+                            <h4 class="font-bold text-slate-800 mb-1 text-sm md:text-base">Clear Communication</h4>
+                            <p class="text-xs md:text-sm text-slate-500">Explain concepts clearly and patiently with strong presentation skills.</p>
                         </div>
-                        <div class="p-4 bg-white/40 rounded-2xl border border-white hover:bg-white/60 transition-colors">
-                            <h4 class="font-bold text-slate-800 mb-1">Classroom Mastery</h4>
-                            <p class="text-sm text-slate-500">Good classroom management, teamwork, and responsible nature.</p>
+                        <div class="p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white">
+                            <h4 class="font-bold text-slate-800 mb-1 text-sm md:text-base">Classroom Mastery</h4>
+                            <p class="text-xs md:text-sm text-slate-500">Good classroom management, teamwork, and responsible nature.</p>
                         </div>
-                        <div class="p-4 bg-white/40 rounded-2xl border border-white hover:bg-white/60 transition-colors">
-                            <h4 class="font-bold text-slate-800 mb-1">STEM Focused</h4>
-                            <p class="text-sm text-slate-500">Familiar with STEM, Physical Science, and Computer Science syllabus.</p>
+                        <div class="p-4 bg-white/50 rounded-xl md:rounded-2xl border border-white">
+                            <h4 class="font-bold text-slate-800 mb-1 text-sm md:text-base">STEM Focused</h4>
+                            <p class="text-xs md:text-sm text-slate-500">Familiar with STEM, Physical Science, and Computer Science syllabus.</p>
                         </div>
                     </div>
                 </div>
@@ -321,15 +326,15 @@
             </div>
         </section>
 
-        <!-- EXPERIENCE & EDUCATION (Sticky Layout) -->
-        <section id="experience" class="py-24 px-4 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        <!-- EXPERIENCE & EDUCATION -->
+        <section id="experience" class="py-16 md:py-24 px-4 md:px-6 max-w-7xl mx-auto w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-16">
                 
                 <!-- Sticky Header Side -->
-                <div class="lg:col-span-4 relative">
-                    <div class="sticky top-32 gs-reveal">
-                        <h2 class="text-4xl font-bold tracking-tight mb-4">Journey & <br><span class="text-gradient">Experience</span>.</h2>
-                        <p class="text-slate-500 mb-8">A timeline of my academic and professional growth.</p>
+                <div class="lg:col-span-4 relative mb-4 lg:mb-0">
+                    <div class="lg:sticky lg:top-32 gs-reveal">
+                        <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3 md:mb-4">Journey & <br><span class="text-gradient">Experience</span>.</h2>
+                        <p class="text-slate-500 text-sm md:text-base mb-6 md:mb-8">A timeline of my academic and professional growth.</p>
                         
                         <div class="hidden lg:block w-32 h-32 bg-blue-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"></div>
                     </div>
@@ -337,65 +342,63 @@
 
                 <!-- Timeline Side -->
                 <div class="lg:col-span-8">
-                    <div class="timeline-container pb-12">
+                    <div class="timeline-container pb-8">
                         <div class="timeline-line"></div>
                         <div class="timeline-progress"></div>
 
                         <!-- Work Items -->
-                        <div class="space-y-12">
+                        <div class="space-y-8 md:space-y-12">
                             
-                            <div class="timeline-item relative pl-8 gs-reveal">
-                                <div class="timeline-dot top-2"></div>
-                                <div class="glass glass-card p-8 rounded-3xl">
-                                    <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                                        <h3 class="text-xl font-bold text-slate-900">Electronic Technician</h3>
-                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold rounded-full">Aug 2023 - Jan 2024</span>
+                            <div class="timeline-item relative pl-6 md:pl-8 gs-reveal">
+                                <div class="timeline-dot top-4 md:top-2"></div>
+                                <div class="glass glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                                        <h3 class="text-lg md:text-xl font-bold text-slate-900 leading-tight">Electronic Technician</h3>
+                                        <span class="px-3 py-1 bg-blue-100 text-blue-700 text-[10px] md:text-xs font-bold rounded-full w-fit">Aug 2023 - Jan 2024</span>
                                     </div>
-                                    <h4 class="text-blue-600 font-medium mb-4">Wintronic Sdn Bhd</h4>
-                                    <p class="text-slate-600 leading-relaxed">
+                                    <h4 class="text-blue-600 font-medium text-sm md:text-base mb-3 md:mb-4">Wintronic Sdn Bhd</h4>
+                                    <p class="text-sm md:text-base text-slate-600 leading-relaxed">
                                         Coordinates and supports for ATE debugging, testing, troubleshooting and repairing new and existing device under test (DUT) up to analogue and digital electronic schematic and electrical circuits such as load board, probe card, and tester card.
                                     </p>
                                 </div>
                             </div>
 
-                            <div class="timeline-item relative pl-8 gs-reveal">
-                                <div class="timeline-dot top-2"></div>
-                                <div class="glass glass-card p-8 rounded-3xl">
-                                    <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                                        <h3 class="text-xl font-bold text-slate-900">Bachelor of Voc. Education (Electric & Electronic)</h3>
-                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">2024 - Present</span>
+                            <div class="timeline-item relative pl-6 md:pl-8 gs-reveal">
+                                <div class="timeline-dot top-4 md:top-2"></div>
+                                <div class="glass glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                                        <h3 class="text-lg md:text-xl font-bold text-slate-900 leading-tight pr-4">Bachelor of Voc. Education (Electric & Electronic)</h3>
+                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-[10px] md:text-xs font-bold rounded-full w-fit">2024 - Present</span>
                                     </div>
-                                    <h4 class="text-purple-600 font-medium mb-2">Universiti Tun Hussein Onn, Johor</h4>
-                                    <div class="inline-block px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-md mb-4">3.59 CGPA (Dean's List)</div>
+                                    <h4 class="text-purple-600 font-medium text-sm md:text-base mb-3">Universiti Tun Hussein Onn, Johor</h4>
+                                    <div class="inline-block px-2.5 py-1 md:px-3 md:py-1 bg-slate-900 text-white text-[10px] md:text-xs font-bold rounded-md">3.59 CGPA (Dean's List)</div>
                                 </div>
                             </div>
 
-                            <div class="timeline-item relative pl-8 gs-reveal">
-                                <div class="timeline-dot top-2"></div>
-                                <div class="glass glass-card p-8 rounded-3xl">
-                                    <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                                        <h3 class="text-xl font-bold text-slate-900">Diploma of Electronic Engineering (Computer)</h3>
-                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-xs font-bold rounded-full">2021 - 2024</span>
+                            <div class="timeline-item relative pl-6 md:pl-8 gs-reveal">
+                                <div class="timeline-dot top-4 md:top-2"></div>
+                                <div class="glass glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                                    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start mb-3 gap-2">
+                                        <h3 class="text-lg md:text-xl font-bold text-slate-900 leading-tight pr-4">Diploma of Electronic Engineering (Computer)</h3>
+                                        <span class="px-3 py-1 bg-purple-100 text-purple-700 text-[10px] md:text-xs font-bold rounded-full w-fit">2021 - 2024</span>
                                     </div>
-                                    <h4 class="text-purple-600 font-medium mb-2">Merlimau Polytechnic of Malaysia, Melaka</h4>
-                                    <div class="inline-block px-3 py-1 bg-slate-900 text-white text-xs font-bold rounded-md mb-4">3.50 CGPA (Dean's List)</div>
+                                    <h4 class="text-purple-600 font-medium text-sm md:text-base mb-3">Merlimau Polytechnic of Malaysia, Melaka</h4>
+                                    <div class="inline-block px-2.5 py-1 md:px-3 md:py-1 bg-slate-900 text-white text-[10px] md:text-xs font-bold rounded-md">3.50 CGPA (Dean's List)</div>
                                 </div>
                             </div>
 
-                            <div class="timeline-item relative pl-8 gs-reveal">
-                                <div class="timeline-dot top-2"></div>
-                                <div class="glass glass-card p-8 rounded-3xl">
-                                    <div class="flex flex-wrap justify-between items-center mb-4 gap-2">
-                                        <h3 class="text-xl font-bold text-slate-900">Sales & Promotions Roles</h3>
-                                    </div>
-                                    <div class="space-y-4">
-                                        <div class="p-4 bg-white/40 rounded-xl">
-                                            <h4 class="font-bold text-slate-800">Sales Assistant - HLA Garment</h4>
-                                            <p class="text-sm text-slate-500">Assisted customers with styling and maintained displays.</p>
+                            <div class="timeline-item relative pl-6 md:pl-8 gs-reveal">
+                                <div class="timeline-dot top-4 md:top-2"></div>
+                                <div class="glass glass-card p-6 md:p-8 rounded-2xl md:rounded-3xl">
+                                    <h3 class="text-lg md:text-xl font-bold text-slate-900 mb-4 md:mb-5">Sales & Promotions Roles</h3>
+                                    <div class="space-y-3 md:space-y-4">
+                                        <div class="p-3 md:p-4 bg-white/50 rounded-xl">
+                                            <h4 class="font-bold text-slate-800 text-sm md:text-base">Sales Assistant - HLA Garment</h4>
+                                            <p class="text-xs md:text-sm text-slate-500 mt-1">Assisted customers with styling and maintained displays.</p>
                                         </div>
-                                        <div class="p-4 bg-white/40 rounded-xl">
-                                            <h4 class="font-bold text-slate-800">Perfume Promoter - ZQ Perfume</h4>
-                                            <p class="text-sm text-slate-500">Promoted products and managed stock during promotions.</p>
+                                        <div class="p-3 md:p-4 bg-white/50 rounded-xl">
+                                            <h4 class="font-bold text-slate-800 text-sm md:text-base">Perfume Promoter - ZQ Perfume</h4>
+                                            <p class="text-xs md:text-sm text-slate-500 mt-1">Promoted products and managed stock during promotions.</p>
                                         </div>
                                     </div>
                                 </div>
@@ -408,67 +411,67 @@
         </section>
 
         <!-- LEADERSHIP & ACHIEVEMENTS -->
-        <section class="py-24 px-4 max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section class="py-12 md:py-24 px-4 md:px-6 max-w-7xl mx-auto w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
                 
                 <!-- Leadership -->
-                <div class="glass rounded-[2rem] p-8 gs-reveal">
-                    <div class="flex justify-between items-end mb-8">
-                        <h2 class="text-3xl font-bold">Leadership</h2>
-                        <i data-lucide="users" class="w-8 h-8 text-blue-500 opacity-50"></i>
+                <div class="glass rounded-2xl md:rounded-[2rem] p-6 md:p-8 gs-reveal">
+                    <div class="flex justify-between items-end mb-6 md:mb-8">
+                        <h2 class="text-2xl md:text-3xl font-bold">Leadership</h2>
+                        <i data-lucide="users" class="w-6 h-6 md:w-8 md:h-8 text-blue-500 opacity-50"></i>
                     </div>
                     
-                    <div class="space-y-6">
-                        <div class="group cursor-default">
-                            <div class="text-sm font-bold text-blue-600 mb-1">2025</div>
-                            <p class="text-slate-700 font-medium group-hover:text-blue-600 transition-colors">Head of Welfare & Volunteerism, Johor Indigenous Student Assoc.</p>
-                            <p class="text-slate-700 font-medium mt-2 group-hover:text-blue-600 transition-colors">Exco, Sports & Recreation, Malaysian Drug Prevention Assoc.</p>
+                    <div class="space-y-5 md:space-y-6">
+                        <div class="group">
+                            <div class="text-xs md:text-sm font-bold text-blue-600 mb-1 md:mb-1.5">2025</div>
+                            <p class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-blue-600 transition-colors">Head of Welfare & Volunteerism, Johor Indigenous Student Assoc.</p>
+                            <p class="text-sm md:text-base text-slate-700 font-medium mt-1.5 md:mt-2 md:group-hover:text-blue-600 transition-colors">Exco, Sports & Recreation, Malaysian Drug Prevention Assoc.</p>
                         </div>
                         <div class="w-full h-px bg-slate-200"></div>
-                        <div class="group cursor-default">
-                            <div class="text-sm font-bold text-blue-600 mb-1">2023</div>
-                            <p class="text-slate-700 font-medium group-hover:text-blue-600 transition-colors">Vice Chairperson, IoT Rocket League Program</p>
-                            <p class="text-slate-700 font-medium mt-2 group-hover:text-blue-600 transition-colors">Multimedia Head, Pre-Grad Night Program</p>
+                        <div class="group">
+                            <div class="text-xs md:text-sm font-bold text-blue-600 mb-1 md:mb-1.5">2023</div>
+                            <p class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-blue-600 transition-colors">Vice Chairperson, IoT Rocket League Program</p>
+                            <p class="text-sm md:text-base text-slate-700 font-medium mt-1.5 md:mt-2 md:group-hover:text-blue-600 transition-colors">Multimedia Head, Pre-Grad Night Program</p>
                         </div>
                         <div class="w-full h-px bg-slate-200"></div>
-                        <div class="group cursor-default">
-                            <div class="text-sm font-bold text-blue-600 mb-1">2019</div>
-                            <p class="text-slate-700 font-medium group-hover:text-blue-600 transition-colors">Chairman, Histomap 2.0 (Yayasan Petronas)</p>
+                        <div class="group">
+                            <div class="text-xs md:text-sm font-bold text-blue-600 mb-1 md:mb-1.5">2019</div>
+                            <p class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-blue-600 transition-colors">Chairman, Histomap 2.0 (Yayasan Petronas)</p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Achievements -->
-                <div class="glass rounded-[2rem] p-8 bg-gradient-to-br from-white/60 to-purple-50/50 gs-reveal">
-                    <div class="flex justify-between items-end mb-8">
-                        <h2 class="text-3xl font-bold">Achievements</h2>
-                        <i data-lucide="trophy" class="w-8 h-8 text-purple-500 opacity-50"></i>
+                <div class="glass rounded-2xl md:rounded-[2rem] p-6 md:p-8 bg-gradient-to-br from-white/60 to-purple-50/50 gs-reveal">
+                    <div class="flex justify-between items-end mb-6 md:mb-8">
+                        <h2 class="text-2xl md:text-3xl font-bold">Achievements</h2>
+                        <i data-lucide="trophy" class="w-6 h-6 md:w-8 md:h-8 text-purple-500 opacity-50"></i>
                     </div>
 
-                    <ul class="space-y-4">
-                        <li class="flex items-start gap-4 group">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 group-hover:bg-purple-500 transition-colors">
-                                <i data-lucide="check" class="w-4 h-4 text-purple-600 group-hover:text-white transition-colors"></i>
+                    <ul class="space-y-3 md:space-y-4">
+                        <li class="flex items-start gap-3 md:gap-4 group">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 md:group-hover:bg-purple-500 transition-colors mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 md:w-4 md:h-4 text-purple-600 md:group-hover:text-white transition-colors"></i>
                             </div>
-                            <span class="text-slate-700 pt-1 font-medium group-hover:text-slate-900">Vice chancellor's cup speech competition, 2025</span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-slate-900 leading-snug">Vice chancellor's cup speech competition, 2025</span>
                         </li>
-                        <li class="flex items-start gap-4 group">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 group-hover:bg-purple-500 transition-colors">
-                                <i data-lucide="check" class="w-4 h-4 text-purple-600 group-hover:text-white transition-colors"></i>
+                        <li class="flex items-start gap-3 md:gap-4 group">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 md:group-hover:bg-purple-500 transition-colors mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 md:w-4 md:h-4 text-purple-600 md:group-hover:text-white transition-colors"></i>
                             </div>
-                            <span class="text-slate-700 pt-1 font-medium group-hover:text-slate-900">Head Department award, 2024</span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-slate-900 leading-snug">Head Department award, 2024</span>
                         </li>
-                        <li class="flex items-start gap-4 group">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 group-hover:bg-purple-500 transition-colors">
-                                <i data-lucide="check" class="w-4 h-4 text-purple-600 group-hover:text-white transition-colors"></i>
+                        <li class="flex items-start gap-3 md:gap-4 group">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 md:group-hover:bg-purple-500 transition-colors mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 md:w-4 md:h-4 text-purple-600 md:group-hover:text-white transition-colors"></i>
                             </div>
-                            <span class="text-slate-700 pt-1 font-medium group-hover:text-slate-900">Top 5 in education themed Final Year Project, 2023</span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-slate-900 leading-snug">Top 5 in education themed Final Year Project, 2023</span>
                         </li>
-                        <li class="flex items-start gap-4 group">
-                            <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 group-hover:bg-purple-500 transition-colors">
-                                <i data-lucide="check" class="w-4 h-4 text-purple-600 group-hover:text-white transition-colors"></i>
+                        <li class="flex items-start gap-3 md:gap-4 group">
+                            <div class="w-6 h-6 md:w-8 md:h-8 rounded-full bg-purple-100 flex items-center justify-center shrink-0 md:group-hover:bg-purple-500 transition-colors mt-0.5">
+                                <i data-lucide="check" class="w-3 h-3 md:w-4 md:h-4 text-purple-600 md:group-hover:text-white transition-colors"></i>
                             </div>
-                            <span class="text-slate-700 pt-1 font-medium group-hover:text-slate-900">3rd place, Parliamentary Malay debate, 2018</span>
+                            <span class="text-sm md:text-base text-slate-700 font-medium md:group-hover:text-slate-900 leading-snug">3rd place, Parliamentary Malay debate, 2018</span>
                         </li>
                     </ul>
                 </div>
@@ -477,52 +480,52 @@
         </section>
 
         <!-- FOOTER & CONTACT -->
-        <footer id="contact" class="py-24 px-4 bg-slate-900 text-white rounded-t-[3rem] mt-12 relative overflow-hidden">
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-blue-500/10 blur-[100px] rounded-full pointer-events-none"></div>
+        <footer id="contact" class="py-16 md:py-24 px-4 md:px-6 bg-slate-900 text-white rounded-t-3xl md:rounded-t-[3rem] mt-8 md:mt-12 relative overflow-hidden w-full">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-4xl bg-blue-500/10 blur-[80px] md:blur-[100px] rounded-full pointer-events-none"></div>
             
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10 gs-reveal">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 relative z-10 gs-reveal">
                 <div>
-                    <h2 class="text-5xl md:text-7xl font-bold tracking-tighter mb-6">Let's <br>Connect.</h2>
-                    <p class="text-slate-400 max-w-sm text-lg">Currently seeking part-time tutoring opportunities to contribute knowledge and gain practical teaching experience.</p>
+                    <h2 class="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter mb-4 md:mb-6">Let's <br>Connect.</h2>
+                    <p class="text-slate-400 text-sm md:text-lg max-w-sm">Currently seeking part-time tutoring opportunities to contribute knowledge and gain practical teaching experience.</p>
                     
-                    <div class="mt-12 space-y-6">
-                        <a href="mailto:hilme610@gmail.com" class="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors w-fit">
-                            <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center">
-                                <i data-lucide="mail" class="w-5 h-5"></i>
+                    <div class="mt-8 md:mt-12 space-y-4 md:space-y-6">
+                        <a href="mailto:hilme610@gmail.com" class="flex items-center gap-3 md:gap-4 text-base md:text-xl hover:text-blue-400 transition-colors w-fit break-all">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="mail" class="w-4 h-4 md:w-5 md:h-5"></i>
                             </div>
                             hilme610@gmail.com
                         </a>
-                        <a href="tel:018-6642943" class="flex items-center gap-4 text-xl hover:text-blue-400 transition-colors w-fit">
-                            <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center">
-                                <i data-lucide="phone" class="w-5 h-5"></i>
+                        <a href="tel:018-6642943" class="flex items-center gap-3 md:gap-4 text-base md:text-xl hover:text-blue-400 transition-colors w-fit">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="phone" class="w-4 h-4 md:w-5 md:h-5"></i>
                             </div>
                             018-6642943
                         </a>
-                        <div class="flex items-center gap-4 text-xl text-slate-300 w-fit">
-                            <div class="w-12 h-12 rounded-full border border-slate-700 flex items-center justify-center">
-                                <i data-lucide="map-pin" class="w-5 h-5"></i>
+                        <div class="flex items-center gap-3 md:gap-4 text-base md:text-xl text-slate-300 w-fit">
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-slate-700 flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-4 h-4 md:w-5 md:h-5"></i>
                             </div>
                             Alai Melaka, Malaysia
                         </div>
                     </div>
                 </div>
 
-                <div class="space-y-8">
-                    <h3 class="text-2xl font-bold border-b border-slate-800 pb-4">References</h3>
+                <div class="space-y-6 md:space-y-8">
+                    <h3 class="text-xl md:text-2xl font-bold border-b border-slate-800 pb-3 md:pb-4">References</h3>
                     
-                    <div class="group hover:bg-slate-800/50 p-6 rounded-2xl transition-colors border border-transparent hover:border-slate-700 cursor-pointer">
-                        <h4 class="text-lg font-bold text-white mb-1">Prof. Madya Ts. Dr Lee Ming Fong</h4>
-                        <p class="text-blue-400 text-sm mb-3">Lecturer & Academic Advisor | UTHM Johor</p>
-                        <div class="text-slate-400 text-sm space-y-1">
+                    <div class="group bg-slate-800/20 md:bg-transparent md:hover:bg-slate-800/50 p-5 md:p-6 rounded-2xl transition-colors border border-slate-800 md:border-transparent md:hover:border-slate-700">
+                        <h4 class="text-base md:text-lg font-bold text-white mb-1">Prof. Madya Ts. Dr Lee Ming Fong</h4>
+                        <p class="text-blue-400 text-xs md:text-sm mb-2 md:mb-3">Lecturer & Academic Advisor | UTHM Johor</p>
+                        <div class="text-slate-400 text-xs md:text-sm space-y-1">
                             <p>016-2316246</p>
                             <p>mflee@uthm.edu.my</p>
                         </div>
                     </div>
 
-                    <div class="group hover:bg-slate-800/50 p-6 rounded-2xl transition-colors border border-transparent hover:border-slate-700 cursor-pointer">
-                        <h4 class="text-lg font-bold text-white mb-1">Siti Zulia Binti Pirin</h4>
-                        <p class="text-purple-400 text-sm mb-3">Lecturer & Academic Supervisor | PMM Melaka</p>
-                        <div class="text-slate-400 text-sm space-y-1">
+                    <div class="group bg-slate-800/20 md:bg-transparent md:hover:bg-slate-800/50 p-5 md:p-6 rounded-2xl transition-colors border border-slate-800 md:border-transparent md:hover:border-slate-700">
+                        <h4 class="text-base md:text-lg font-bold text-white mb-1">Siti Zulia Binti Pirin</h4>
+                        <p class="text-purple-400 text-xs md:text-sm mb-2 md:mb-3">Lecturer & Academic Supervisor | PMM Melaka</p>
+                        <div class="text-slate-400 text-xs md:text-sm space-y-1">
                             <p>019-3839200</p>
                             <p>sitizulia@staff.pmm.edu.my</p>
                         </div>
@@ -530,7 +533,7 @@
                 </div>
             </div>
             
-            <div class="max-w-7xl mx-auto mt-24 pt-8 border-t border-slate-800 flex justify-between items-center text-slate-500 text-sm">
+            <div class="max-w-7xl mx-auto mt-16 md:mt-24 pt-6 md:pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-xs md:text-sm text-center">
                 <p>&copy; 2026 Mohamad Zulhilme. All rights reserved.</p>
                 <button onclick="window.scrollTo(0,0)" class="hover:text-white transition-colors flex items-center gap-2">
                     Back to top <i data-lucide="arrow-up" class="w-4 h-4"></i>
@@ -546,6 +549,9 @@
         lucide.createIcons();
 
         // 2. Initialize Lenis (Smooth Scroll)
+        // Check if device is likely a mobile/touch device
+        const isTouchDevice = (('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0));
+        
         const lenis = new Lenis({
             duration: 1.2,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -553,6 +559,7 @@
             gestureDirection: 'vertical',
             smooth: true,
             mouseMultiplier: 1,
+            // Disable smooth scrolling on touch devices for native feel
             smoothTouch: false,
             touchMultiplier: 2,
             infinite: false,
@@ -570,24 +577,26 @@
         gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
         gsap.ticker.lagSmoothing(0);
 
-        // 3. Custom Cursor Logic
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        
-        window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
+        // 3. Custom Cursor Logic (Only active on non-touch devices)
+        if (!isTouchDevice) {
+            const cursorDot = document.querySelector('.cursor-dot');
+            const cursorOutline = document.querySelector('.cursor-outline');
             
-            // Dot follows instantly
-            cursorDot.style.left = `${posX}px`;
-            cursorDot.style.top = `${posY}px`;
-            
-            // Outline follows with slight delay
-            cursorOutline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
-        });
+            window.addEventListener('mousemove', (e) => {
+                const posX = e.clientX;
+                const posY = e.clientY;
+                
+                // Dot follows instantly
+                cursorDot.style.left = `${posX}px`;
+                cursorDot.style.top = `${posY}px`;
+                
+                // Outline follows with slight delay
+                cursorOutline.animate({
+                    left: `${posX}px`,
+                    top: `${posY}px`
+                }, { duration: 500, fill: "forwards" });
+            });
+        }
 
         // 4. Hero Animations (On Load)
         const tlHero = gsap.timeline();
@@ -598,13 +607,13 @@
             y: "0%",
             duration: 1,
             ease: "power4.out",
-            stagger: 0.1,
-            delay: 0.2
+            stagger: 0.05,
+            delay: 0.1
         })
         .to('.hero-badge', { opacity: 1, y: 0, duration: 0.8, ease: "back.out(1.7)" }, "-=0.6")
         .to('.hero-subtitle', { opacity: 1, duration: 1 }, "-=0.6")
         .to('.hero-buttons', { opacity: 1, duration: 1 }, "-=0.8")
-        .to('.hero-image-container', { opacity: 1, scale: 1, duration: 1.5, ease: "power3.out" }, "-=1.2");
+        .to('.hero-image-container', { opacity: 1, scale: 1, duration: 1.2, ease: "power3.out" }, "-=1.2");
 
         // 5. Scroll Animations
         
@@ -640,15 +649,15 @@
         const revealElements = gsap.utils.toArray('.gs-reveal');
         revealElements.forEach((elem) => {
             gsap.fromTo(elem, 
-                { autoAlpha: 0, y: 50 }, 
+                { autoAlpha: 0, y: 30 }, 
                 { 
-                    duration: 1, 
+                    duration: 0.8, 
                     autoAlpha: 1, 
                     y: 0, 
-                    ease: "power3.out",
+                    ease: "power2.out",
                     scrollTrigger: {
                         trigger: elem,
-                        start: "top 85%",
+                        start: "top 90%",
                         toggleActions: "play none none reverse"
                     }
                 }
