@@ -1,16 +1,510 @@
-<!doctype html>
-<html lang="<!-- figma:lang -->">
-  <head>
-    <!-- figma:head-start -->
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><!-- figma:title --></title>
-    <!-- figma:head-end -->
-  </head>
-  <body>
-    <!-- figma:body-start -->
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <!-- figma:body-end -->
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohamad Zulhilme - Resume</title>
+    
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS (CDN for single-file usage) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            blue: '#3b82f6',
+                            purple: '#9333ea',
+                            lightblue: '#bae6fd'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+        ::selection {
+            background-color: #e9d5ff; /* purple-200 */
+            color: #581c87; /* purple-900 */
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
+            border-radius: 1.5rem;
+        }
+        .bg-gradient-text {
+            background: linear-gradient(to right, #1d4ed8, #9333ea);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .skill-fill {
+            width: 0;
+            transition: width 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .timeline-line::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 1.25rem;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, #e2e8f0, transparent);
+        }
+        @media (min-width: 768px) {
+            .timeline-line::before {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen relative">
+
+    <!-- Dynamic Background Orbs -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-400/20 blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-purple-400/20 blur-[120px]"></div>
+        <div class="absolute top-[40%] left-[30%] w-[30%] h-[30%] rounded-full bg-sky-400/10 blur-[100px]"></div>
+    </div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 py-12 md:py-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            
+            <!-- Sidebar / Profile Section -->
+            <aside class="lg:col-span-4 space-y-8" data-aos="fade-right" data-aos-duration="1000">
+                <div class="glass-panel p-8 sticky top-12">
+                    <!-- Profile Picture -->
+                    <div class="relative w-48 h-48 mx-auto mb-6 group">
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-500 to-purple-500 rounded-full blur opacity-40 group-hover:opacity-60 transition-opacity duration-500"></div>
+                        <img src="src/imports/zul.jpg" alt="Mohamad Zulhilme" class="relative w-full h-full object-cover rounded-full border-4 border-white shadow-xl" onerror="this.src='https://ui-avatars.com/api/?name=Mohamad+Zulhilme&background=e0e7ff&color=3730a3&size=256'"/>
+                    </div>
+                    
+                    <!-- Name & Title -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-2xl font-bold bg-gradient-text mb-2">Mohamad Zulhilme</h1>
+                        <p class="text-slate-500 font-medium">Aspiring Vocational Educator</p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="phone" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium">018-6642943</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="mail" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium">hilme610@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="map-pin" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium">Alai Melaka, Malaysia</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="calendar" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium">10 June 2002</span>
+                        </div>
+                        <div class="flex items-center gap-3 text-slate-600">
+                            <div class="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 shrink-0">
+                                <i data-lucide="user" class="w-4 h-4"></i>
+                            </div>
+                            <span class="text-sm font-medium">Male | Single</span>
+                        </div>
+                    </div>
+
+                    <!-- Languages -->
+                    <div class="space-y-6 pt-6 border-t border-slate-200/60">
+                        <h3 class="font-semibold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="heart" class="w-5 h-5 text-purple-500"></i>
+                            Language
+                        </h3>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-700">Malay</span>
+                                    <span class="text-slate-400 text-xs">Advanced</span>
+                                </div>
+                                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="skill-fill h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-700">English</span>
+                                    <span class="text-slate-400 text-xs">Advanced</span>
+                                </div>
+                                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="skill-fill h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" data-width="85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-700">Japanese</span>
+                                    <span class="text-slate-400 text-xs">Beginner</span>
+                                </div>
+                                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="skill-fill h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" data-width="30%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="font-medium text-slate-700">Korean</span>
+                                    <span class="text-slate-400 text-xs">Beginner</span>
+                                </div>
+                                <div class="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
+                                    <div class="skill-fill h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full" data-width="30%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Skills -->
+                    <div class="space-y-6 pt-6 mt-6 border-t border-slate-200/60">
+                        <h3 class="font-semibold text-slate-900 flex items-center gap-2">
+                            <i data-lucide="code" class="w-5 h-5 text-blue-500"></i>
+                            Tech Skills
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-lg border border-blue-100">Programming</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-lg border border-blue-100">Database</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-lg border border-blue-100">IoT Devices</span>
+                            <span class="px-3 py-1.5 bg-blue-50 text-blue-700 text-xs font-semibold rounded-lg border border-blue-100">Troubleshooting</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="lg:col-span-8 space-y-8">
+                
+                <!-- Objective -->
+                <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-4 flex items-center gap-3">
+                        <i data-lucide="user" class="w-6 h-6 text-blue-600"></i>
+                        Professional Objective
+                    </h2>
+                    <p class="text-slate-600 leading-relaxed text-lg">
+                        Dedicated Bachelor of Vocational Education (Electrical and Electronics) student at Universiti Tun Hussein Onn Malaysia with a current CGPA of <span class="font-semibold text-purple-600">3.59</span>. Passionate about teaching and helping students achieve academic excellence. Strong communication, leadership and interpersonal skills with experience in handling educational and public engagement activities. Seeking a part-time Tutor position to contribute knowledge while developing practical teaching experience.
+                    </p>
+                </section>
+
+                <!-- Teaching Strengths -->
+                <section class="p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-white/80 bg-gradient-to-br from-blue-50 to-purple-50" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <i data-lucide="lightbulb" class="w-6 h-6 text-purple-600"></i>
+                        Teaching Strengths
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Explain concepts clearly & patiently</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Strong presentation & communication</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Good classroom management</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Familiar with STEM & Sci/Comp syllabus</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Fast learner and responsible</span>
+                        </div>
+                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white/50 backdrop-blur-sm border border-white hover:shadow-md transition-shadow">
+                            <i data-lucide="star" class="w-4 h-4 text-purple-500 mt-0.5 fill-purple-200"></i>
+                            <span class="text-sm text-slate-700 font-medium">Proficient in MS Office & Google Workspace</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Experience -->
+                <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                        <i data-lucide="briefcase" class="w-6 h-6 text-blue-600"></i>
+                        Working Experience
+                    </h2>
+                    
+                    <div class="relative timeline-line space-y-8">
+                        
+                        <!-- Timeline Item 1 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:flex-row group" data-aos="fade-up">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-100 text-blue-600 shadow shrink-0 md:order-1 md:translate-x-[-50%] md:left-1/2 md:absolute z-10">
+                                <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] ml-auto md:w-[calc(50%-2.5rem)] md:ml-0 p-5 rounded-2xl bg-white/60 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-right">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-end sm:justify-between mb-2">
+                                    <span class="text-xs font-semibold text-purple-600 bg-purple-50 px-2 py-1 rounded-md whitespace-nowrap mb-2 sm:mb-0 order-first sm:order-last sm:ml-4">Aug 2023 - Jan 2024</span>
+                                    <h4 class="font-bold text-slate-900 text-lg order-last sm:order-first">Electronic Technician</h4>
+                                </div>
+                                <div class="text-blue-600 font-medium text-sm mb-3">Wintronic Sdn Bhd</div>
+                                <p class="text-slate-600 text-sm leading-relaxed">Coordinates and supports for ATE debugging, testing, troubleshooting and repairing new and existing device under test (DUT) up to analogue and digital electronic schematic and electrical circuits.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 2 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:flex-row-reverse group" data-aos="fade-up">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-100 text-blue-600 shadow shrink-0 md:order-1 md:translate-x-[-50%] md:left-1/2 md:absolute z-10">
+                                <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] ml-auto md:w-[calc(50%-2.5rem)] md:ml-0 md:mr-auto p-5 rounded-2xl bg-white/60 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-left">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                    <h4 class="font-bold text-slate-900 text-lg">Sales Assistant (Part-Time)</h4>
+                                </div>
+                                <div class="text-blue-600 font-medium text-sm mb-3">HLA Garment</div>
+                                <p class="text-slate-600 text-sm leading-relaxed">Assisted customers with product selection and styling advice. Maintained store cleanliness and merchandise displays.</p>
+                            </div>
+                        </div>
+
+                        <!-- Timeline Item 3 -->
+                        <div class="relative flex items-center justify-between md:justify-normal md:flex-row group" data-aos="fade-up">
+                            <div class="flex items-center justify-center w-10 h-10 rounded-full border-4 border-white bg-blue-100 text-blue-600 shadow shrink-0 md:order-1 md:translate-x-[-50%] md:left-1/2 md:absolute z-10">
+                                <i data-lucide="briefcase" class="w-4 h-4"></i>
+                            </div>
+                            <div class="w-[calc(100%-4rem)] ml-auto md:w-[calc(50%-2.5rem)] md:ml-0 p-5 rounded-2xl bg-white/60 border border-slate-100 shadow-sm hover:shadow-md transition-shadow text-right">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-2">
+                                    <h4 class="font-bold text-slate-900 text-lg">Perfume Promoter</h4>
+                                </div>
+                                <div class="text-blue-600 font-medium text-sm mb-3">ZQ Perfume</div>
+                                <p class="text-slate-600 text-sm leading-relaxed">Promoted perfume products and explained features to customers. Managed product display and stock during promotion.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="400">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-8 flex items-center gap-3">
+                        <i data-lucide="graduation-cap" class="w-6 h-6 text-purple-600"></i>
+                        Educational Background
+                    </h2>
+                    <div class="space-y-6">
+                        
+                        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <div class="sm:w-32 shrink-0">
+                                <span class="inline-block px-3 py-1 bg-slate-200/50 text-slate-600 text-xs font-bold rounded-lg">2024 - Present</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Bachelor of Voc. Education (Electric & Electronic)</h4>
+                                <p class="text-slate-600 text-sm mb-2">Universiti Tun Hussein Onn, Johor</p>
+                                <span class="inline-flex text-xs font-semibold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-md">3.59 CGPA (DEAN LIST)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <div class="sm:w-32 shrink-0">
+                                <span class="inline-block px-3 py-1 bg-slate-200/50 text-slate-600 text-xs font-bold rounded-lg">2021 - 2024</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">Diploma of Electronic Engineering (Computer)</h4>
+                                <p class="text-slate-600 text-sm mb-2">Merlimau Polytechnic of Malaysia, Melaka</p>
+                                <span class="inline-flex text-xs font-semibold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-md">3.50 CGPA (DEAN LIST)</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 p-5 rounded-2xl border border-slate-100 bg-slate-50/50 hover:bg-slate-50 transition-colors">
+                            <div class="sm:w-32 shrink-0">
+                                <span class="inline-block px-3 py-1 bg-slate-200/50 text-slate-600 text-xs font-bold rounded-lg">2015 - 2019</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-900 mb-1">SPM</h4>
+                                <p class="text-slate-600 text-sm mb-2">SMK Tinggi Melaka, Melaka</p>
+                                <span class="inline-flex text-xs font-semibold text-purple-700 bg-purple-100 px-2.5 py-1 rounded-md">PASS</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Grid Layout for Leadership & Achievements -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    
+                    <!-- Leadership -->
+                    <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="500">
+                        <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                            <i data-lucide="users" class="w-5 h-5 text-blue-600"></i>
+                            Leadership
+                        </h2>
+                        <ul class="space-y-6">
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-2">2025</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span>Head of Welfare & Volunteerism, Johor Indigenous Student Assoc.</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span>Exco, Sports & Recreation, Malaysian Drug Prevention Assoc.</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-2">2023</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span>Vice Chairperson, IoT Rocket League Program</span>
+                                    </li>
+                                    <li class="flex items-start gap-2 text-sm text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span>Multimedia Head, Pre-Grad Night Program</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h5 class="font-bold text-slate-900 mb-2">2019</h5>
+                                <ul class="space-y-2">
+                                    <li class="flex items-start gap-2 text-sm text-slate-600">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-blue-400 mt-1.5 shrink-0"></span>
+                                        <span>Chairman, Histomap 2.0 (Yayasan Petronas)</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </section>
+
+                    <!-- Achievements -->
+                    <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="600">
+                        <h2 class="text-xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                            <i data-lucide="award" class="w-5 h-5 text-purple-600"></i>
+                            Achievements
+                        </h2>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3 text-sm text-slate-700 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                                <i data-lucide="award" class="w-4 h-4 text-purple-500 mt-0.5 shrink-0"></i>
+                                <span>Vice chancellor's cup speech competition, 2025</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                                <i data-lucide="award" class="w-4 h-4 text-purple-500 mt-0.5 shrink-0"></i>
+                                <span>1st semester dean's award, 2024</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                                <i data-lucide="award" class="w-4 h-4 text-purple-500 mt-0.5 shrink-0"></i>
+                                <span>Head Department award, 2024</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                                <i data-lucide="award" class="w-4 h-4 text-purple-500 mt-0.5 shrink-0"></i>
+                                <span>Top 5 in education themed FYP, 2023</span>
+                            </li>
+                            <li class="flex items-start gap-3 text-sm text-slate-700 p-2 rounded-lg hover:bg-slate-50 transition-colors">
+                                <i data-lucide="award" class="w-4 h-4 text-purple-500 mt-0.5 shrink-0"></i>
+                                <span>3rd place, Parliamentary Malay debate, 2018</span>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- References -->
+                <section class="glass-panel p-8" data-aos="fade-up" data-aos-delay="700">
+                    <h2 class="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
+                        <i data-lucide="book-open" class="w-6 h-6 text-blue-600"></i>
+                        References
+                    </h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-5 rounded-2xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 shadow-sm">
+                            <h4 class="font-bold text-slate-900 text-sm mb-1">PROF. MADYA TS. Dr LEE MING FONG</h4>
+                            <p class="text-xs font-medium text-blue-600 mb-3">Lecturer & Academic Advisor</p>
+                            <div class="text-xs text-slate-500 space-y-1 mb-4">
+                                <p>Faculty of Technical Education and Vocational</p>
+                                <p>UTHM Johor</p>
+                            </div>
+                            <div class="space-y-2 text-sm text-slate-700">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <a href="tel:016-2316246" class="hover:text-blue-600 transition-colors">016-2316246</a>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <a href="mailto:mflee@uthm.edu.my" class="hover:text-blue-600 transition-colors">mflee@uthm.edu.my</a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="p-5 rounded-2xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 shadow-sm">
+                            <h4 class="font-bold text-slate-900 text-sm mb-1">SITI ZULIA BINTI PIRIN</h4>
+                            <p class="text-xs font-medium text-blue-600 mb-3">Lecturer & Academic Supervisor</p>
+                            <div class="text-xs text-slate-500 space-y-1 mb-4">
+                                <p>Electrical Engineering Department</p>
+                                <p>PMM Melaka</p>
+                            </div>
+                            <div class="space-y-2 text-sm text-slate-700">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="phone" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <a href="tel:019-3839200" class="hover:text-blue-600 transition-colors">019-3839200</a>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="mail" class="w-3.5 h-3.5 text-slate-400"></i>
+                                    <a href="mailto:sitizulia@staff.pmm.edu.my" class="hover:text-blue-600 transition-colors">sitizulia@staff.pmm.edu.my</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Initialize Animate On Scroll (AOS)
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+
+        // Trigger Skill Bar Animations after load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const skillFills = document.querySelectorAll('.skill-fill');
+                skillFills.forEach(fill => {
+                    fill.style.width = fill.getAttribute('data-width');
+                });
+            }, 500); // slight delay so the user sees the slide-in
+        });
+    </script>
+</body>
 </html>
